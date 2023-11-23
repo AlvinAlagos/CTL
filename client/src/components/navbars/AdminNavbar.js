@@ -1,6 +1,5 @@
-import styled from "styled-components";
-
-const DefaultNavbar = () => {
+import styled from "styled-components"
+const AdminNavbar = () => {
     return (
         <NavbarWrapper>
             <Logo>CTL Inc.</Logo>
@@ -21,4 +20,5 @@ const Logo = styled.h1`
     margin:auto;
     width:50%;
 `
-export default DefaultNavbar;
+
+export default AdminNavbar;
