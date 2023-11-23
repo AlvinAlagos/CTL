@@ -1,7 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
 
-const {registerUser} = require('./src/handlers/loginSignupHandlers')
+const {registerUser,loginUser} = require('./src/handlers/loginSignupHandlers')
 express()
 
 .use(morgan('tiny'))
@@ -10,7 +10,7 @@ express()
 .use(express.static('public'))
 .use(express.json())
 
-
+.post('/login',loginUser)
 .post('/register', registerUser)
 .get('*', (req, res) => {
     res
