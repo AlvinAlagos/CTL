@@ -2,6 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 
 const {registerUser,loginUser} = require('./src/handlers/loginSignupHandlers')
+const {getProjectAssigned,getUserTimesheet,getEmployeeWage} = require('./src/handlers/userDashboardHandler')
 express()
 
 .use(morgan('tiny'))
@@ -9,6 +10,10 @@ express()
 
 .use(express.static('public'))
 .use(express.json())
+
+.get('/projects/:_id/:name', getProjectAssigned)
+.get('/timesheet/:_id', getUserTimesheet)
+.get('/employee/wage/:_id',getEmployeeWage)
 
 .post('/login',loginUser)
 .post('/register', registerUser)

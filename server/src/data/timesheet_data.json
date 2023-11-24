@@ -1,0 +1,161 @@
+[{
+        "employee_id": "06a783bf-61c7-437d-aee2-2418781bfbe7",
+        "employee_name": "Alvin Alagos",
+        "date": "1/2/2023",
+        "start_time": "7:00 AM",
+        "end_time": "5:00 PM",
+        "hours_worked": 10
+    },
+    {
+        "employee_id": "06a783bf-61c7-437d-aee2-2418781bfbe7",
+        "employee_name": "Alvin Alagos",
+        "date": "1/3/2023",
+        "start_time": "7:00 AM",
+        "end_time": "5:00 PM",
+        "hours_worked": 10
+    },
+    {
+        "employee_id": "06a783bf-61c7-437d-aee2-2418781bfbe7",
+        "employee_name": "Alvin Alagos",
+        "date": "1/2/2023",
+        "start_time": "7:00 AM",
+        "end_time": "5:00 PM",
+        "hours_worked": 10
+    },
+    {
+        "employee_id": "06a783bf-61c7-437d-aee2-2418781bfbe7",
+        "employee_name": "Alvin Alagos",
+        "date": "1/4/2023",
+        "start_time": "7:00 AM",
+        "end_time": "5:00 PM",
+        "hours_worked": 10
+    },
+    {
+        "employee_id": "06a783bf-61c7-437d-aee2-2418781bfbe7",
+        "employee_name": "Alvin Alagos",
+        "date": "1/5/2023",
+        "start_time": "7:00 AM",
+        "end_time": "5:00 PM",
+        "hours_worked": 10
+    },
+    {
+        "employee_id": "06a783bf-61c7-437d-aee2-2418781bfbe7",
+        "employee_name": "Alvin Alagos",
+        "date": "2/3/2023",
+        "start_time": "7:00 AM",
+        "end_time": "5:00 PM",
+        "hours_worked": 10
+    },
+    {
+        "employee_id": "06a783bf-61c7-437d-aee2-2418781bfbe7",
+        "employee_name": "Alvin Alagos",
+        "date": "3/4/2023",
+        "start_time": "7:00 AM",
+        "end_time": "5:00 PM",
+        "hours_worked": 10
+    },
+    {
+        "employee_id": "06a783bf-61c7-437d-aee2-2418781bfbe7",
+        "employee_name": "Alvin Alagos",
+        "date": "4/5/2023",
+        "start_time": "7:00 AM",
+        "end_time": "5:00 PM",
+        "hours_worked": 10
+    },
+    {
+        "employee_id": "06a783bf-61c7-437d-aee2-2418781bfbe7",
+        "employee_name": "Alvin Alagos",
+        "date": "5/5/2023",
+        "start_time": "7:00 AM",
+        "end_time": "5:00 PM",
+        "hours_worked": 10
+    },
+    {
+        "employee_id": "06a783bf-61c7-437d-aee2-2418781bfbe7",
+        "employee_name": "Alvin Alagos",
+        "date": "6/6/2023",
+        "start_time": "7:00 AM",
+        "end_time": "5:00 PM",
+        "hours_worked": 10
+    },
+    {
+        "employee_id": "06a783bf-61c7-437d-aee2-2418781bfbe7",
+        "employee_name": "Alvin Alagos",
+        "date": "7/7/2023",
+        "start_time": "7:00 AM",
+        "end_time": "5:00 PM",
+        "hours_worked": 10
+    },
+    {
+        "employee_id": "06a783bf-61c7-437d-aee2-2418781bfbe7",
+        "employee_name": "Alvin Alagos",
+        "date": "7/12/2023",
+        "start_time": "7:00 AM",
+        "end_time": "5:00 PM",
+        "hours_worked": 10
+    },
+    {
+        "employee_id": "06a783bf-61c7-437d-aee2-2418781bfbe7",
+        "employee_name": "Alvin Alagos",
+        "date": "8/8/2023",
+        "start_time": "7:00 AM",
+        "end_time": "5:00 PM",
+        "hours_worked": 10
+    },
+    {
+        "employee_id": "06a783bf-61c7-437d-aee2-2418781bfbe7",
+        "employee_name": "Alvin Alagos",
+        "date": "9/9/2023",
+        "start_time": "7:00 AM",
+        "end_time": "5:00 PM",
+        "hours_worked": 10
+    },
+    {
+        "employee_id": "06a783bf-61c7-437d-aee2-2418781bfbe7",
+        "employee_name": "Alvin Alagos",
+        "date": "10/2/2023",
+        "start_time": "7:00 AM",
+        "end_time": "5:00 PM",
+        "hours_worked": 10
+    },
+    {
+        "employee_id": "06a783bf-61c7-437d-aee2-2418781bfbe7",
+        "employee_name": "Alvin Alagos",
+        "date": "11/2/2023",
+        "start_time": "7:00 AM",
+        "end_time": "5:00 PM",
+        "hours_worked": 10
+    },
+    {
+        "employee_id": "06a783bf-61c7-437d-aee2-2418781bfbe7",
+        "employee_name": "Alvin Alagos",
+        "date": "11/12/2023",
+        "start_time": "7:00 AM",
+        "end_time": "5:00 PM",
+        "hours_worked": 10
+    },
+    {
+        "employee_id": "06a783bf-61c7-437d-aee2-2418781bfbe7",
+        "employee_name": "Alvin Alagos",
+        "date": "11/22/2023",
+        "start_time": "7:00 AM",
+        "end_time": "5:00 PM",
+        "hours_worked": 10
+    },
+    {
+        "employee_id": "06a783bf-61c7-437d-aee2-2418781bfbe7",
+        "employee_name": "Alvin Alagos",
+        "date": "12/2/2023",
+        "start_time": "7:00 AM",
+        "end_time": "5:00 PM",
+        "hours_worked": 10
+    },
+    {
+        "employee_id": "06a783bf-61c7-437d-aee2-2418781bfbe7",
+        "employee_name": "Alvin Alagos",
+        "date": "12/4/2023",
+        "start_time": "7:00 AM",
+        "end_time": "5:00 PM",
+        "hours_worked": 10
+    }
+]

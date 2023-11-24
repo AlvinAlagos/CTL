@@ -9,6 +9,7 @@
         "@mui/material": "^5.14.18",
         "@mui/styled-engine": "npm:@mui/styled-engine-sc@latest",
         "@mui/styled-engine-sc": "^6.0.0-alpha.6",
+        "@mui/x-charts": "^6.18.2",
         "@mui/x-date-pickers": "^6.18.1",
         "dayjs": "^1.11.10",
         "js-cookie": "^3.0.5",
