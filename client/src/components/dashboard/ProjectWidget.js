@@ -1,4 +1,5 @@
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
+import {CircularProgress} from "@mui/material";
 import { useEffect, useState } from "react";
 
 const ProjectWidget = () => {
@@ -13,14 +14,14 @@ const ProjectWidget = () => {
     }, [])
 
     return (
-    <TableContainer component={Paper}>
+    !projectListings
+    ?<CircularProgress/>
+    :<TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
             <TableHead>
                 <TableRow>
                     {
-                        !projectListings
-                        ?<h1>Loadin</h1>
-                        :Object.keys(projectListings[0]).map((key) => {
+                    Object.keys(projectListings[0]).map((key) => {
                         if(key !== 'project_assigned' && key.includes('client') !== true){ return (
                                 <TableCell key={key}>{key}</TableCell>
                             )}
@@ -30,9 +31,7 @@ const ProjectWidget = () => {
             </TableHead>
             <TableBody>
                 {
-                    !projectListings
-                    ?<h1>Loadin</h1>
-                    :projectListings.map((row) => {
+                        projectListings.map((row) => {
                         return (<TableRow key={row._id}sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                         <TableCell component="th" scope="row">
                             {row._id}
