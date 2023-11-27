@@ -6,7 +6,7 @@ import { Wrapper,LoginCard,CoverImg,Img,LoginForm,Inputs,Input,Submit,SignUp } f
 import { useNavigate } from "react-router-dom";
 import {useSignIn} from "react-auth-kit";
 //Redo organization and styling of page
-const LogIn = () => {
+const LogIn = ({setUserInfo}) => {
     const [email, setEmail] = useState('');
     const [password,setPassword] = useState('');
     const login = useSignIn();
@@ -17,6 +17,10 @@ const LogIn = () => {
         navigate("/signup");
     }
 
+    const successfullLogin = (userInfo) => {
+        setUserInfo({...userInfo})
+        navigate("/dashboard");
+    }
     const handleLogin = (event) => {
         event.preventDefault();
         const body = {
@@ -42,7 +46,7 @@ const LogIn = () => {
                     tokenType: "Bearer",
                     authState: {user: data.user, email:email},
                 });
-                navigate("/dashboard");
+                successfullLogin(data.userInfo)
             } else if(data.data === 'password'){
                 
             }

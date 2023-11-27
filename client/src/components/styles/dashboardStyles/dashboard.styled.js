@@ -1,7 +1,11 @@
 
 import { Paper } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import { Button, Container, TextField, Typography } from "@mui/material";
+import { Button, Container, TextField, Typography,Box } from "@mui/material";
+export const DashboardWrapper = styled(Box)(({theme}) => ({
+    display:'flex',
+    justifyContent:'row'
+})) 
 export const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
     ...theme.typography.body2,
@@ -9,6 +13,7 @@ export const Item = styled(Paper)(({ theme }) => ({
     textAlign: 'center',
     color: theme.palette.text.secondary,
     
+   
   }));
 
 export const SubmitButton = styled(Button)(({theme}) => ({

@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 const ProjectWidget = () => {
     const [projectListings, setProjectListings] = useState();
     useEffect(() => {
-        fetch(`http://localhost:3000/projects/655e751f32446adedd0c64a7/Alvin`, {
+        fetch(`http://localhost:3000/projects/06a783bf-61c7-437d-aee2-2418781bfbe7/Alvin`, {
             method: 'GET',
         })
         .then(response => response.json())
@@ -17,7 +17,7 @@ const ProjectWidget = () => {
     !projectListings
     ?<CircularProgress/>
     :<TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
+        <Table sx={{ minWidth: 650, minHeight:'100%' }} size="small" aria-label="a dense table">
             <TableHead>
                 <TableRow>
                     {

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {  BrowserRouter as Router, Routes, Route, BrowserRouter } from "react-router-dom";
 import UserNavbar from "./navbars/UserNavbar";
 import { RequireAuth } from 'react-auth-kit';
@@ -12,6 +12,8 @@ import AdminNavbar from "./navbars/AdminNavbar";
 
 
 function App() {
+  const [userInfo, setUserInfo] = useState({})
+
   const auth = useAuthUser();
   const userType = auth() === null ? 'User' :  auth().user;
   
@@ -20,16 +22,16 @@ function App() {
     <React.Fragment>    
         <GlobalStyles/>
         <Router>        
-          {userType === 'User' ? <UserNavbar auth={auth}/> :<AdminNavbar/> }
+          {userType === 'User' ? <UserNavbar auth={auth}/> :<AdminNavbar auth={auth}/> }
               <Routes>
-                  <Route path="/login" element={<LogIn/>} />
+                  <Route path="/login" element={<LogIn setUserInfo={setUserInfo}/>} />
                   <Route path="/signup" element={<Signup/>} />
                   { userType === 'Admin' 
                     ?<Route path="/dashboard" element={ 
                       <RequireAuth loginPath={'/login'}><AdminDashboard/></RequireAuth>
                     }/>
                     :<Route path="/dashboard" element={ 
-                      <RequireAuth loginPath={'/login'}><UserDashboard/></RequireAuth>
+                      <RequireAuth loginPath={'/login'}><UserDashboard userInfo={userInfo}/></RequireAuth>
                     }/>
                   }
 
