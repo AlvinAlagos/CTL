@@ -1,6 +1,7 @@
 const {MongoClient} = require("mongodb")
 const bcrypt = require('bcrypt')
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
+const { match } = require("assert");
 require("dotenv").config();
 const { MONGO_URI } = process.env;
 const options = {
@@ -43,6 +44,11 @@ const loginUser = async(request,response) => {
         const {email, password} = body;
         const db = client.db("CTL");
         const matchedUser = await db.collection('users').findOne({email:email})
+        const userInfoToSend = {
+            employee_id: matchedUser.employee_id,
+            email: matchedUser.email,
+            fullName : `${matchedUser.firstName} ${matchedUser.lastName}`
+        }
         const isValid = await bcrypt.compare(password, matchedUser.password);
         
         if (isValid){     
@@ -50,7 +56,12 @@ const loginUser = async(request,response) => {
                 {id:matchedUser._id,email:matchedUser.email},
                 process.env.JWT_KEY,
             )      
-            response.status(200).json({status:200,data: 'success', user: matchedUser.firstName === 'Admin' ? 'Admin': 'User', token:jsonWebToken});
+            response.status(200).json({
+                status:200,
+                data: 'success', 
+                user: matchedUser.firstName === 'Admin' ? 'Admin': 'User', 
+                userInfo:userInfoToSend, 
+                token:jsonWebToken});
         }else{
             response.status(401).json({status:401,data: "password"});
         }
@@ -61,5 +72,6 @@ const loginUser = async(request,response) => {
         client.close()
     }
 }
+
 
 module.exports = {registerUser,loginUser}

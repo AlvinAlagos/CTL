@@ -17,7 +17,7 @@ const ClockinWidget = ({userInfo}) => {
             end_time: endTime,
             date: selectedDate,
         }
-        console.log(body);
+        
         fetch(`http://localhost:3000/clockin`,{
             method:'POST',
             headers:{

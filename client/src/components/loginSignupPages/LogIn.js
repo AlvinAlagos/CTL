@@ -27,7 +27,6 @@ const LogIn = ({setUserInfo}) => {
             email:email,
             password:password
         }
-        console.log('inside')
         fetch('http://localhost:3000/login',{
             method:"POST",
             headers:{
@@ -38,7 +37,6 @@ const LogIn = ({setUserInfo}) => {
         })
         .then(res => res.json())
         .then(data => {
-            console.log(data)
             if(data.data === 'success'){
                 login({
                     token:data.token,

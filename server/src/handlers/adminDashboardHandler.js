@@ -4,87 +4,86 @@ const { MONGO_URI } = process.env;
 const options = {
 };
 
-const getProjectAssigned = async(request,response) => {
+const getAllProjects = async(request,response) => {
     const client = new MongoClient(MONGO_URI, options);
-    const {_id, name} = request.params;
+    
+    try{
+        await client.connect();
+        const db = client.db("CTL");
+        const result = await db.collection('projects').find().toArray();
+
+        response.status(200).json({status:200, data: result});
+
+    }catch(error){
+        console.log(error)
+        response.status(400).json({status:400,data: 'fail'});
+    }finally{
+        client.close()
+    }
+}
+
+const getAllEmployees = async(request, response) => {
+    const client = new MongoClient(MONGO_URI, options);
+    
+    try{
+        await client.connect();
+        const db = client.db("CTL");
+        const result = await db.collection('employees').find().toArray();
+
+        response.status(200).json({status:200, data: result});
+
+    }catch(error){
+        console.log(error)
+        response.status(400).json({status:400,data: 'fail'});
+    }finally{
+        client.close()
+    }
+}
+
+const updateProject = async(request,response) => {
+    const client = new MongoClient(MONGO_URI, options);
+    const body = request.body;
+    try{
+        await client.connect();
+        const db = client.db("CTL");
+        const result = await db.collection('projects').updateOne({_id: new ObjectId(body._id)},{$set:{
+            project_name: body.project_name,
+            project_description: body.project_description,
+            start_date: body.start_date,
+            end_date: body.end_date,
+            project_manager:body.project_manager,
+            project_status: body.project_status,
+            client_name: body.client_name,
+            client_email: body.client_email,
+            project_location: body.project_location,
+            project_assigned:body.project_assigned
+        }});
+
+        response.status(200).json({status:200, data: result});
+
+    }catch(error){
+        response.status(400).json({status:400,data: 'fail'});
+    }finally{
+        client.close()
+    }
+}
+
+const deleteProjects = async(request,response) => {
+    const client = new MongoClient(MONGO_URI, options);
+    const _id = request.params._id;
     console.log(_id)
     try{
         await client.connect();
         const db = client.db("CTL");
-        const result = await db.collection('projects').find({
-            project_assigned: {name: name,employee_id:_id}
-        }).toArray();
+        const result = await db.collection('projects').deleteOne({_id: new ObjectId(_id)});
 
         response.status(200).json({status:200, data: result});
 
     }catch(error){
-        console.log(error)
-        response.status(400).json({status:400,data: 'fail'});
-    }finally{
-        client.close()
-    }
-}
-const getEmployeeWage = async(request,response) => {
-    const client = new MongoClient(MONGO_URI, options);
-    const {_id} = request.params;
-    try{
-        await client.connect();
-        const db = client.db("CTL");
-        const result = await db.collection('employees').find({_id:_id}).toArray();
-
-        response.status(200).json({status:200, data: result[0].hourly_wage});
-
-    }catch(error){
-        console.log(error)
         response.status(400).json({status:400,data: 'fail'});
     }finally{
         client.close()
     }
 }
 
-const getUserTimesheet = async(request,response) => {
-    const client = new MongoClient(MONGO_URI, options);
-    const {_id} = request.params;
-    console.log(_id)
-    try{
-        await client.connect();
-        const db = client.db("CTL");
-        const result = await db.collection('timesheet').find({
-            employee_id: _id,
-        }).toArray();
-
-        response.status(200).json({status:200, data: result});
-
-    }catch(error){
-        console.log(error)
-        response.status(400).json({status:400,data: 'fail'});
-    }finally{
-        client.close()
-    }
-}
-
-const insertClockin = async(request,response) => {
-    const client = new MongoClient(MONGO_URI, options);
-    const {employee_id,employee_name,start_time,end_time,date} = request.body;
-    const hoursWorked = Number(end_time.substring(0,(end_time.indexOf(':')))) - Number(start_time.substring(0,(start_time.indexOf(':'))));
-    try{
-        await client.connect();
-        const db = client.db("CTL");
-        const result = await db.collection('timesheet').insertOne({
-            employee_id: employee_id,
-            employee_name: employee_name,
-            start_time:start_time,
-            end_time:end_time,
-            date:date,
-            hours_worked:hoursWorked
-        });
-        response.status(200).json({status:200, data: result});
-    }catch(error){
-        console.log(error)
-        response.status(400).json({status:400,data: 'fail'});
-    }finally{
-        client.close()
-    }
-}
-
-module.exports = {getProjectAssigned,getUserTimesheet,getEmployeeWage,insertClockin}
+module.exports = {getAllProjects,getAllEmployees,updateProject,deleteProjects};

@@ -31,7 +31,7 @@ const calcHoursDoneInMonths = (data,wage) => {
     }
 
 
-    console.log(incomeInMonth)
+    
     return incomeInMonth;
 }
 
@@ -61,7 +61,6 @@ const IncomeChartWidget = () => {
             records.forEach((record) => {
                 totalHours += record.hours_worked;
             })
-            console.log(data.data)
             setHoursWorked(totalHours);
             setTimesheet(data.data)
         })
