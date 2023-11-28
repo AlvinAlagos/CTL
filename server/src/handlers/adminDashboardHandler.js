@@ -40,6 +40,31 @@ const getAllEmployees = async(request, response) => {
     }
 }
 
+const createProject = async(request,response) => {
+    const client = new MongoClient(MONGO_URI, options);
+    const body = request.body;
+    try{
+        await client.connect();
+        const db = client.db("CTL");
+        const result = await db.collection('projects').insertOne({
+            project_name: body.project_name,
+            project_description: body.project_description,
+            start_date: body.start_date,
+            end_date: body.end_date,
+            project_manager:body.project_manager,
+            project_status: body.project_status,
+            client_name: body.client_name,
+            client_email: body.client_email,
+            project_location: body.project_location,
+            project_assigned:body.project_assigned
+        });
+        response.status(200).json({status:200, data: result});
+    }catch(error){
+        response.status(400).json({status:400,data: 'fail'});
+    }finally{
+        client.close()
+    }
+}
 const updateProject = async(request,response) => {
     const client = new MongoClient(MONGO_URI, options);
     const body = request.body;
@@ -85,5 +110,48 @@ const deleteProjects = async(request,response) => {
         client.close()
     }
 }
+const createEmployee = async(request,response) => {
+    
+}
+const updateEmployee = async(request,response) => {
+    const client = new MongoClient(MONGO_URI, options);
+    const body = request.body;
+    try{
+        await client.connect();
+        const db = client.db("CTL");
+        const result = await db.collection('employees').updateOne({_id: body._id},{$set:{
+            _id:body._id,
+            employee_address: body.employee_address,
+            hourly_wage: body.hourly_wage,
+            userId: body.userId,
+            employee_name: body.employee_name
+        }});
 
-module.exports = {getAllProjects,getAllEmployees,updateProject,deleteProjects};
+        response.status(200).json({status:200, data: result});
+
+    }catch(error){
+        response.status(400).json({status:400,data: 'fail'});
+    }finally{
+        client.close()
+    }
+}
+
+const deleteEmployee = async(request,response) => {
+    const client = new MongoClient(MONGO_URI, options);
+    const _id = request.params._id;
+    console.log(_id)
+    try{
+        await client.connect();
+        const db = client.db("CTL");
+        const result = await db.collection('employees').deleteOne({_id: _id});
+
+        response.status(200).json({status:200, data: result});
+
+    }catch(error){
+        response.status(400).json({status:400,data: 'fail'});
+    }finally{
+        client.close()
+    }
+}
+
+module.exports = {getAllProjects,getAllEmployees,createProject,updateProject,deleteProjects,updateEmployee,deleteEmployee};

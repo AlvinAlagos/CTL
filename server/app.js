@@ -3,7 +3,7 @@ const morgan = require('morgan');
 
 const {registerUser,loginUser} = require('./src/handlers/loginSignupHandlers')
 const {getProjectAssigned,getUserTimesheet,getEmployeeWage,insertClockin} = require('./src/handlers/userDashboardHandler')
-const {getAllProjects,getAllEmployees,updateProject,deleteProjects} = require('./src/handlers/adminDashboardHandler');
+const {getAllProjects,getAllEmployees,createProject,updateProject,deleteProjects,updateEmployee,deleteEmployee} = require('./src/handlers/adminDashboardHandler');
 express()
 
 .use(morgan('tiny'))
@@ -21,10 +21,13 @@ express()
 .post('/login',loginUser)
 .post('/register', registerUser)
 .post('/clockin', insertClockin)
+.post('/projects',createProject)
 
 .put('/projects', updateProject)
+.put('/employees', updateEmployee)
 
 .delete('/projects/:_id',deleteProjects)
+.delete('/employees/:_id', deleteEmployee)
 .get('*', (req, res) => {
     res
         .status(404)
