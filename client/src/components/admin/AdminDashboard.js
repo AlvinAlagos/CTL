@@ -4,6 +4,7 @@ import { CardHeaders, DashboardWrapper, Item } from "../styles/dashboardStyles/d
 import AdminProjectsWidget from "../admin/adminProjectWidget/AdminProjectsWidget";
 import AdminEmployeesWidget from "./adminEmployeeWidget/AdminEmployeesWidget";
 import AdminInventoryWidget from "./adminInventoryWidget.js/AdminInventoryWidget";
+import AdminArchivedWidget from "./adminArchivedWidget.js/AdminArchivedWidget";
 import AddIcon from '@mui/icons-material/Add';
 import { useState } from "react";
 
@@ -32,6 +33,12 @@ const AdminDashboard = () => {
                     <Item id="test">
                         <CardHeaders variant="h5">Inventory <Button onClick={() => {setModalType('create');setOpenInventoryModal(true);}} sx={{float:'right'}}><AddIcon/></Button></CardHeaders>
                         <AdminInventoryWidget openModal={openInventoryModal} setOpenModal={setOpenInventoryModal} modalType={modalType} setModalType={setModalType}/>
+                    </Item>
+                </Grid>
+                <Grid  item  xs={12} sm={12} xl={6} style={{ flexGrow: 1 }}>
+                    <Item id="test">
+                        <CardHeaders variant="h5">Inventory <Button onClick={() => {setModalType('create');setOpenInventoryModal(true);}} sx={{float:'right'}}><AddIcon/></Button></CardHeaders>
+                        <AdminArchivedWidget openModal={openInventoryModal} setOpenModal={setOpenInventoryModal} modalType={modalType} setModalType={setModalType}/>
                     </Item>
                 </Grid>
                 

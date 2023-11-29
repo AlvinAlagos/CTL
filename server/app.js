@@ -15,7 +15,8 @@ const {
     deleteEmployee,
     createInventory,
     updateInventory,
-    deleteInventory
+    deleteInventory,
+    getAllArchived
 } = require('./src/handlers/adminDashboardHandler');
 express()
 
@@ -31,7 +32,7 @@ express()
 .get('/employee/wage/:_id',getEmployeeWage)
 .get('/employees',getAllEmployees)
 .get('/inventory',getAllInventory)
-
+.get('/archived', getAllArchived)
 .post('/login',loginUser)
 .post('/register', registerUser)
 .post('/clockin', insertClockin)

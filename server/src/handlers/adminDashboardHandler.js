@@ -101,7 +101,7 @@ const updateProject = async(request,response) => {
     try{
         await client.connect();
         const db = client.db("CTL");
-        if(body.project_status === 'Completed'){
+        if(body.project_status !== 'Completed'){
             const result = await db.collection('projects').updateOne({_id: new ObjectId(body._id)},{$set:{
                 project_name: body.project_name,
                 project_description: body.project_description,
@@ -117,7 +117,7 @@ const updateProject = async(request,response) => {
             response.status(200).json({status:200, data: result});
         }else{
             const deleteResult = await db.collection('projects').deleteOne({_id: new ObjectId(body._id)});
-            const archivedResult = await db.collection('projects').insertOne({
+            const archivedResult = await db.collection('archived_projects').insertOne({
                 project_name: body.project_name,
                 project_description: body.project_description,
                 start_date: body.start_date,
@@ -128,6 +128,7 @@ const updateProject = async(request,response) => {
                 client_email: body.client_email,
                 project_location: body.project_location,
             })
+            response.status(200).json({status:200, data: archivedResult});
         }
     }catch(error){
         response.status(400).json({status:400,data: 'fail'});
@@ -302,6 +303,24 @@ const deleteInventory = async(request,response) => {
     }
 }
 
+const getAllArchived = async(request,response) => {
+    const client = new MongoClient(MONGO_URI, options);
+    
+    try{
+        await client.connect();
+        const db = client.db("CTL");
+        const result = await db.collection('archived_projects').find().toArray();
+
+        response.status(200).json({status:200, data: result});
+
+    }catch(error){
+        console.log(error)
+        response.status(400).json({status:400,data: 'fail'});
+    }finally{
+        client.close()
+    }
+}
+
 
 
 module.exports = {
@@ -316,5 +335,6 @@ module.exports = {
     deleteEmployee,
     createInventory,
     updateInventory,
-    deleteInventory
+    deleteInventory,
+    getAllArchived
 };

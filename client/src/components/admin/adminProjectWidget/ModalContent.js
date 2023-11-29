@@ -20,6 +20,7 @@ const ModalContent = ({modalType,data, handleClose}) => {
             project_assigned:data.project_assigned
         } 
     );
+    const [selectedValue, setSelectedValue] = useState('');
     const [toDelete, setToDelete] = useState(false);
     const [toUpdate, setToUpdate] = useState(false);
     const [toCreate, setToCreate] = useState(false);
@@ -39,6 +40,14 @@ const ModalContent = ({modalType,data, handleClose}) => {
     const handleCreate = () => {
         setToCreate(true);
     }
+
+    const handleSelect = (value) => {
+        console.log(value)
+        // console.log(employees)
+        setSelectedValue(value)
+        
+        
+    };
     console.log(Object.keys(projectInfo))
     //FIX THE ASSIGNED SELECT NOT SHOWING
     return (
@@ -54,6 +63,17 @@ const ModalContent = ({modalType,data, handleClose}) => {
                                         data[key] === null
                                         ?<SelectEmployee key={key} projectInfo={projectInfo} setProjectInfo={setProjectInfo} assignedEmployees={null}/>
                                         :<SelectEmployee key={key} projectInfo={projectInfo} setProjectInfo={setProjectInfo} assignedEmployees={data[key].map(employee => employee.name)}/>
+                                    )
+                                }else if(key === 'project_status'){
+                                    return (
+                                        <FormControlLabel control={
+                                            <Select value={projectInfo[key]} onChange={event => setProjectInfo({...projectInfo,[key]:event.target.value})} sx={{minWidth:'50%'}}>
+                                                <MenuItem value={'Not Started'}>{'Not Started'}</MenuItem>
+                                                <MenuItem value={'On Hold'}>{'On Hold'}</MenuItem>
+                                                <MenuItem value={'In Progress'}>{'In Progress'}</MenuItem>
+                                                <MenuItem value={'Completed'}>{'Completed'}</MenuItem>
+                                            </Select>
+                                        } label={'project_assigned'} labelPlacement="start" sx={{display:'flex', justifyContent:'space-between', paddingTop:'10px'}}/>
                                     )
                                 }else{           
                                                     
