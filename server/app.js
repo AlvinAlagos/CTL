@@ -16,8 +16,10 @@ const {
     createInventory,
     updateInventory,
     deleteInventory,
-    getAllArchived
+    getAllArchived,
+    deleteArchived
 } = require('./src/handlers/adminDashboardHandler');
+
 express()
 
 .use(morgan('tiny'))
@@ -47,6 +49,7 @@ express()
 .delete('/projects/:_id',deleteProjects)
 .delete('/employees/:_id', deleteEmployee)
 .delete('/inventory/:_id', deleteInventory)
+.delete('/archived/:_id', deleteArchived)
 
 .get('*', (req, res) => {
     res

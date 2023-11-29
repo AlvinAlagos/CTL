@@ -9,7 +9,7 @@ import Signup from "./loginSignupPages/Signup";
 import UserDashboard from "./dashboard/UserDashboard";
 import AdminDashboard from "./admin/AdminDashboard";
 import AdminNavbar from "./navbars/AdminNavbar";
-
+import AdminProjectsPage from "./admin/pages/AdminProjectsPage";
 
 function App() {
   const [userInfo, setUserInfo] = useState({})
@@ -27,14 +27,21 @@ function App() {
                   <Route path="/login" element={<LogIn setUserInfo={setUserInfo}/>} />
                   <Route path="/signup" element={<Signup/>} />
                   { userType === 'Admin' 
-                    ?<Route path="/dashboard" element={ 
-                      <RequireAuth loginPath={'/login'}><AdminDashboard/></RequireAuth>
-                    }/>
+                    ?(
+                      <>
+                        <Route path="/" element={ 
+                          <RequireAuth loginPath={'/login'}><AdminDashboard/></RequireAuth>
+                        }/>
+                        <Route path="/projects" element={ 
+                          <RequireAuth loginPath={'/login'}><AdminProjectsPage/></RequireAuth>
+                        }/>
+                      </>
+                    )
                     :<Route path="/dashboard" element={ 
                       <RequireAuth loginPath={'/login'}><UserDashboard userInfo={userInfo}/></RequireAuth>
                     }/>
                   }
-
+                  
                 </Routes>
         </Router>
     </React.Fragment>

@@ -321,6 +321,24 @@ const getAllArchived = async(request,response) => {
     }
 }
 
+const deleteArchived = async(request, response) => {
+    const client = new MongoClient(MONGO_URI, options);
+    const _id = request.params._id
+    try{
+        await client.connect();
+        const db = client.db("CTL");
+        const result = await db.collection('archived_projects').deleteOne({_id:new ObjectId(_id)});
+
+        response.status(200).json({status:200, data: result});
+
+    }catch(error){
+        console.log(error)
+        response.status(400).json({status:400,data: 'fail'});
+    }finally{
+        client.close()
+    }
+}
+
 
 
 module.exports = {
@@ -336,5 +354,6 @@ module.exports = {
     createInventory,
     updateInventory,
     deleteInventory,
-    getAllArchived
+    getAllArchived,
+    deleteArchived
 };

@@ -1,7 +1,83 @@
+import { Box, Button, DialogActions, DialogContent, FormControlLabel, MenuItem, Select, TextField } from "@mui/material";
+import { useState } from "react";
+import useFetch from "../../hooks/useFetch";
+import useFetchDelete from "../../hooks/useFetchDelete";
+import useFetchPut from "../../hooks/useFetchPut";
 
 const ArchivedModalContent = ({modalType,data, handleClose}) => {
+    const [projectInfo, setProjectInfo] = useState(
+        {
+            _id: data._id,
+            project_name: data.project_name,
+            project_description: data.project_description,
+            start_date: data.start_date,
+            end_date: data.end_date,
+            project_manager:data.project_manager,
+            project_status: data.project_status,
+            client_name: data.client_name,
+            client_email: data.client_email,
+            project_location: data.project_location,
+            project_assigned:data.project_assigned
+        } 
+    );
+    const [selectedValue, setSelectedValue] = useState('');
+    const [toDelete, setToDelete] = useState(false);
+    const [toUpdate, setToUpdate] = useState(false);
+    const [toCreate, setToCreate] = useState(false);
+    const [deleteConfirmation] = useFetchDelete(`http://localhost:3000/archived/${data._id}`, 'DELETE', toDelete, setToDelete)
+    // const [updateConfirmation] = useFetchPut(`http://localhost:3000/projects/`, 'PUT',projectInfo, toUpdate, setToUpdate)
+    // const [createConfirmation] = useFetchPut(`http://localhost:3000/projects/`, 'POST',projectInfo, toCreate, setToCreate)
+
+    //PUT CONFIRM SCREEN
+    const handleDelete = () => {
+        handleClose();
+        setToDelete(true);
+    }
+
+    //Not SURE if update is needed since it
+    const handleUpdate = () => {   
+        // setToUpdate(true);   
+    }
+    const handleCreate = () => {
+        setToCreate(true);
+    }
+
+    //FIX THE ASSIGNED SELECT NOT SHOWING
     return (
-        <h1>test</h1>
+        <form onSubmit={() => modalType === 'edit' ? handleUpdate() : handleCreate()}>
+            <DialogContent>              
+                    <Box>
+                        {
+                            Object.keys(data).map((key) => {         
+                                console.log('here edit')                       
+                                if(key === 'project_assigned'){
+                                }else if(key === 'project_status'){
+                                    return (
+                                        <FormControlLabel control={
+                                            <Select value={projectInfo[key]} onChange={event => setProjectInfo({...projectInfo,[key]:event.target.value})} sx={{minWidth:'50%'}} disabled={true}>
+                                                <MenuItem value={'Not Started'}>{'Not Started'}</MenuItem>
+                                                <MenuItem value={'On Hold'}>{'On Hold'}</MenuItem>
+                                                <MenuItem value={'In Progress'}>{'In Progress'}</MenuItem>
+                                                <MenuItem value={'Completed'}>{'Completed'}</MenuItem>
+                                            </Select>
+                                        } label={'project_assigned'} labelPlacement="start" sx={{display:'flex', justifyContent:'space-between', paddingTop:'10px'}}/>
+                                    )
+                                }else{           
+                                                    
+                                        return (
+                                        <FormControlLabel key={key} control={<TextField value={projectInfo[key]} onChange={event => setProjectInfo({...projectInfo,[key]:event.target.value})} sx={{minWidth:'50%'}} disabled={true}/>} label={key} labelPlacement="start" sx={{display:'flex', justifyContent:'space-between', paddingTop:'10px'}}/>)
+                                }
+                            })
+                            
+                        }
+                    </Box>
+            </DialogContent>
+            <DialogActions>             
+                <Button onClick={handleClose}>Cancel</Button>
+                <Button type="Submit" onClick={() => handleDelete()}>Delete</Button>
+                <Button type="Submit" onClick={handleClose}>Save</Button>
+            </DialogActions>
+        </form>
     )
 }
 

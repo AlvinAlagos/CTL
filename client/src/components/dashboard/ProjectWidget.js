@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 const ProjectWidget = () => {
     const [projectListings, setProjectListings] = useState();
     useEffect(() => {
-        fetch(`http://localhost:3000/projects/06a783bf-61c7-437d-aee2-2418781bfbe7/Alvin`, {
+        fetch(`http://localhost:3000/projects/06a783bf-61c7-437d-aee2-2418781bfbe7/Alvin Alagos`, {
             method: 'GET',
         })
         .then(response => response.json())
@@ -13,6 +13,7 @@ const ProjectWidget = () => {
         .catch(error => console.log(error))
     }, [])
 
+    console.log(projectListings)
     return (
     !projectListings
     ?<CircularProgress/>

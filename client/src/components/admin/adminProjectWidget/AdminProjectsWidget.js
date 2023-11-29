@@ -5,7 +5,6 @@ import useFetch from "../../hooks/useFetch";
 import ModalContent from "./ModalContent";
 
 const AdminProjectsWidget = ({openModal,setOpenModal,modalType, setModalType}) => {
-    //const [projectListings, setProjectListings] = useState();
     const [rowSelected, setRowSelected] = useState({});
     const [projectListings, setProjectListings] = useFetch('http://localhost:3000/projects', 'GET');
     const handleClose = () => {
@@ -35,7 +34,7 @@ const AdminProjectsWidget = ({openModal,setOpenModal,modalType, setModalType}) =
             <ModalContent modalType={modalType} data={rowSelected} handleClose={handleClose}/>           
         </Dialog>
 
-        {  !projectListings
+        {!projectListings
         ?<CircularProgress/>
         :<TableContainer component={Paper} sx={{maxHeight:"300px"}}>
             <Table sx={{ minWidth: 650, minHeight:'100%' }} size="small" aria-label="a dense table">

@@ -19,7 +19,7 @@ const LogIn = ({setUserInfo}) => {
 
     const successfullLogin = (userInfo) => {
         setUserInfo({...userInfo})
-        navigate("/dashboard");
+        navigate("/");
     }
     const handleLogin = (event) => {
         event.preventDefault();
@@ -37,6 +37,7 @@ const LogIn = ({setUserInfo}) => {
         })
         .then(res => res.json())
         .then(data => {
+            console.log(data)
             if(data.data === 'success'){
                 login({
                     token:data.token,

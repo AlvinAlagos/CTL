@@ -50,7 +50,7 @@ const loginUser = async(request,response) => {
             fullName : `${matchedUser.firstName} ${matchedUser.lastName}`
         }
         const isValid = await bcrypt.compare(password, matchedUser.password);
-        
+        console.log(password)
         if (isValid){     
             const jsonWebToken = jwt.sign(
                 {id:matchedUser._id,email:matchedUser.email},
