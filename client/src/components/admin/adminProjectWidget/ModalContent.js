@@ -39,7 +39,7 @@ const ModalContent = ({modalType,data, handleClose}) => {
     const handleCreate = () => {
         setToCreate(true);
     }
-    console.log(modalType)
+    console.log(Object.keys(projectInfo))
     //FIX THE ASSIGNED SELECT NOT SHOWING
     return (
         <form onSubmit={() => modalType === 'edit' ? handleUpdate() : handleCreate()}>
@@ -47,7 +47,8 @@ const ModalContent = ({modalType,data, handleClose}) => {
                     <Box>
                         {
                             modalType === 'edit'
-                            ?Object.keys(data).map((key) => {                               
+                            ?Object.keys(data).map((key) => {         
+                                console.log('here edit')                       
                                 if(key === 'project_assigned'){
                                     return (
                                         data[key] === null
@@ -60,12 +61,11 @@ const ModalContent = ({modalType,data, handleClose}) => {
                                         <FormControlLabel key={key} control={<TextField value={projectInfo[key]} onChange={event => setProjectInfo({...projectInfo,[key]:event.target.value})} sx={{minWidth:'50%'}} />} label={key} labelPlacement="start" sx={{display:'flex', justifyContent:'space-between', paddingTop:'10px'}}/>)
                                 }
                             })
-                            :Object.keys(data).map((key) => {                               
+                            :Object.keys(projectInfo).map((key) => {               
+                                console.log('here')                
                                 if(key === 'project_assigned'){
                                     return (
-                                        data[key] === null
-                                        ?<SelectEmployee key={key} modalType={modalType} projectInfo={projectInfo} setProjectInfo={setProjectInfo} assignedEmployees={null}/>
-                                        :<SelectEmployee key={key} modalType={modalType} projectInfo={projectInfo} setProjectInfo={setProjectInfo} assignedEmployees={data[key].map(employee => employee.name)}/>
+                                        <SelectEmployee key={key} modalType={modalType} projectInfo={projectInfo} setProjectInfo={setProjectInfo} assignedEmployees={null}/>
                                     )
                                 }else{           
                                                     

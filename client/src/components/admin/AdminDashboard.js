@@ -3,12 +3,15 @@ import UserToolBar from "../navbars/UserToolBar";
 import { CardHeaders, DashboardWrapper, Item } from "../styles/dashboardStyles/dashboard.styled";
 import AdminProjectsWidget from "../admin/adminProjectWidget/AdminProjectsWidget";
 import AdminEmployeesWidget from "./adminEmployeeWidget/AdminEmployeesWidget";
+import AdminInventoryWidget from "./adminInventoryWidget.js/AdminInventoryWidget";
 import AddIcon from '@mui/icons-material/Add';
 import { useState } from "react";
 
 const AdminDashboard = () => {
     const [openProjectsModal, setOpenProjectsModal] = useState(false);
-    const [modalType, setModalType] = useState(null);
+    const [openEmployeesModal, setOpenEmployeesModal] = useState(false)
+    const [openInventoryModal, setOpenInventoryModal] = useState(false)
+    const [modalType, setModalType] = useState('create');
     return (
         <DashboardWrapper>
             <UserToolBar/>
@@ -21,8 +24,14 @@ const AdminDashboard = () => {
                 </Grid>
                 <Grid  item  xs={12} sm={12} xl={6} style={{ flexGrow: 1 }}>
                     <Item id="test">
-                        <CardHeaders variant="h5">Employees</CardHeaders>
-                        <AdminEmployeesWidget/>
+                        <CardHeaders variant="h5">Employees <Button onClick={() => {setModalType('create');setOpenEmployeesModal(true);}} sx={{float:'right'}}><AddIcon/></Button></CardHeaders>
+                        <AdminEmployeesWidget openModal={openEmployeesModal} setOpenModal={setOpenEmployeesModal} modalType={modalType} setModalType={setModalType}/>
+                    </Item>
+                </Grid>
+                <Grid  item  xs={12} sm={12} xl={6} style={{ flexGrow: 1 }}>
+                    <Item id="test">
+                        <CardHeaders variant="h5">Inventory <Button onClick={() => {setModalType('create');setOpenInventoryModal(true);}} sx={{float:'right'}}><AddIcon/></Button></CardHeaders>
+                        <AdminInventoryWidget openModal={openInventoryModal} setOpenModal={setOpenInventoryModal} modalType={modalType} setModalType={setModalType}/>
                     </Item>
                 </Grid>
                 

@@ -3,7 +3,20 @@ const morgan = require('morgan');
 
 const {registerUser,loginUser} = require('./src/handlers/loginSignupHandlers')
 const {getProjectAssigned,getUserTimesheet,getEmployeeWage,insertClockin} = require('./src/handlers/userDashboardHandler')
-const {getAllProjects,getAllEmployees,createProject,updateProject,deleteProjects,updateEmployee,deleteEmployee} = require('./src/handlers/adminDashboardHandler');
+const {
+    getAllProjects,
+    getAllEmployees,
+    getAllInventory,
+    createProject,
+    updateProject,
+    deleteProjects,
+    createEmployee,
+    updateEmployee,
+    deleteEmployee,
+    createInventory,
+    updateInventory,
+    deleteInventory
+} = require('./src/handlers/adminDashboardHandler');
 express()
 
 .use(morgan('tiny'))
@@ -17,17 +30,23 @@ express()
 .get('/timesheet/:_id', getUserTimesheet)
 .get('/employee/wage/:_id',getEmployeeWage)
 .get('/employees',getAllEmployees)
+.get('/inventory',getAllInventory)
 
 .post('/login',loginUser)
 .post('/register', registerUser)
 .post('/clockin', insertClockin)
 .post('/projects',createProject)
+.post('/employees',createEmployee)
+.post('/inventory', createInventory)
 
 .put('/projects', updateProject)
 .put('/employees', updateEmployee)
+.put('/inventory',updateInventory)
 
 .delete('/projects/:_id',deleteProjects)
 .delete('/employees/:_id', deleteEmployee)
+.delete('/inventory/:_id', deleteInventory)
+
 .get('*', (req, res) => {
     res
         .status(404)

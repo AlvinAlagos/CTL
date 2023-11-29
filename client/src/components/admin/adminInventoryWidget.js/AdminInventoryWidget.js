@@ -2,11 +2,9 @@ import { Button, Dialog, DialogTitle,Paper, Table, TableBody, TableCell, TableCo
 import {CircularProgress} from "@mui/material";
 import { useEffect, useState } from "react";
 import useFetch from "../../hooks/useFetch";
-import EmployeeModalContent from "./EmployeeModalContent";
-
-const AdminEmployeesWidget = ({openModal,setOpenModal,modalType,setModalType}) => {
-
-    const [employeeListings] = useFetch(`http://localhost:3000/employees`, 'GET');
+import InventoryModalContent from "./InventoryModalContent";
+const AdminInventoryWidget = ({openModal,setOpenModal,modalType,setModalType}) => {
+    const [inventoryListings] = useFetch(`http://localhost:3000/inventory`, 'GET');
     const [rows,setRows] = useState();
     const [rowSelected, setRowSelected] = useState({});
     
@@ -24,16 +22,17 @@ const AdminEmployeesWidget = ({openModal,setOpenModal,modalType,setModalType}) =
         <>
         <Dialog open={openModal} onClose={handleClose} sx={{['& .MuiDialog-paper']: {minWidth:'800px'}}}>
             <DialogTitle>Edit</DialogTitle>
-            <EmployeeModalContent modalType={modalType} data={rowSelected} handleClose={handleClose}/>           
+            <InventoryModalContent modalType={modalType} data={rowSelected} handleClose={handleClose}/>           
         </Dialog>
-        { !employeeListings
+
+        { !inventoryListings
             ?<CircularProgress/>
             :<TableContainer component={Paper} sx={{minHeight:"300px",maxHeight:"300px"}}>
                 <Table sx={{ minWidth: 650, minHeight:'100%' }} size="small" aria-label="a dense table">
                     <TableHead>
                         <TableRow>
                             {
-                            Object.keys(employeeListings[0]).map((key) => {
+                            Object.keys(inventoryListings[0]).map((key) => {
                                 if(key !== 'project_assigned' && key.includes('client') !== true){ return (
                                         <TableCell key={key}>{key}</TableCell>
                                     )}
@@ -43,15 +42,18 @@ const AdminEmployeesWidget = ({openModal,setOpenModal,modalType,setModalType}) =
                     </TableHead>
                     <TableBody>
                         {
-                                employeeListings.map((row) => {
+                                inventoryListings.map((row) => {
+                                    console.log(row)
                                 return (<TableRow key={row._id}sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                                 <TableCell component="th" scope="row">
                                     <Button onClick={() => {handleClick(row)}} sx={{textAlign:'left'}}>{row._id}</Button>
                                 </TableCell>
-                                <TableCell align="left">{row.employee_address}</TableCell>
-                                <TableCell align="left">{row.hourly_wage}</TableCell>
-                                <TableCell align="left">{row.userId}</TableCell>
-                                <TableCell align="left">{row.employee_name}</TableCell>
+                                <TableCell align="left">{row.description}</TableCell>
+                                <TableCell align="left">{row.store}</TableCell>
+                                <TableCell align="left">${row.price}</TableCell>
+                                <TableCell align="left">{row.quantity}</TableCell>
+                                <TableCell align="left">${row.total}</TableCell>
+                                <TableCell align="left">{row.date}</TableCell>
                                 </TableRow>)
                             })
                         }
@@ -61,4 +63,5 @@ const AdminEmployeesWidget = ({openModal,setOpenModal,modalType,setModalType}) =
         </>
     )
 }
-export default AdminEmployeesWidget;
+
+export default AdminInventoryWidget;
