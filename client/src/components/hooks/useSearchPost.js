@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 
-const useFetchPost = (url,method,body,toCreate,setToCreate) => {
+const useFetchPost = (url,method,body,toCreate,setToCreate,setProjectListings) => {
     const [data,setData] = useState(null);
 
     useEffect(() => {
+        console.log('called')
         if(toCreate === true){           
             fetch(url,{
                 method:method,
@@ -14,10 +15,10 @@ const useFetchPost = (url,method,body,toCreate,setToCreate) => {
                 body:JSON.stringify(body)
             })
             .then(response => response.json())
-            .then(data => {setToCreate(false);setData(data.data);})
+            .then(data => {setToCreate(false);setProjectListings(data.data);setData(data.data);})
             .catch(error => console.log(error))
         }
-    },[url,method,body,toCreate])
+    },[url,method,body])
     
     return [data, setData]
 }

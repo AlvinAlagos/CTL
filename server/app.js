@@ -3,6 +3,7 @@ const morgan = require('morgan');
 
 const {registerUser,loginUser} = require('./src/handlers/loginSignupHandlers')
 const {getProjectAssigned,getUserTimesheet,getEmployeeWage,insertClockin} = require('./src/handlers/userDashboardHandler')
+const {searchProject} = require('./src/handlers/projectPageHandler')
 const {
     getAllProjects,
     getAllEmployees,
@@ -35,12 +36,14 @@ express()
 .get('/employees',getAllEmployees)
 .get('/inventory',getAllInventory)
 .get('/archived', getAllArchived)
+
 .post('/login',loginUser)
 .post('/register', registerUser)
 .post('/clockin', insertClockin)
 .post('/projects',createProject)
 .post('/employees',createEmployee)
 .post('/inventory', createInventory)
+.post('/projects/search',searchProject)
 
 .put('/projects', updateProject)
 .put('/employees', updateEmployee)

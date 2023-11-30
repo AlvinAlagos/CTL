@@ -5,6 +5,7 @@ import useFetch from "../../hooks/useFetch";
 import useFetchDelete from "../../hooks/useFetchDelete";
 import useFetchPut from "../../hooks/useFetchPut";
 const ModalContent = ({modalType,data, handleClose}) => {
+    console.log(data)
     const [projectInfo, setProjectInfo] = useState(
         {
             _id: data._id,
@@ -48,7 +49,7 @@ const ModalContent = ({modalType,data, handleClose}) => {
         
         
     };
-    console.log(Object.keys(projectInfo))
+    console.log(projectInfo)
     //FIX THE ASSIGNED SELECT NOT SHOWING
     return (
         <form onSubmit={() => modalType === 'edit' ? handleUpdate() : handleCreate()}>
