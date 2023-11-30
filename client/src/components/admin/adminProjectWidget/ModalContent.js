@@ -4,6 +4,9 @@ import { useState } from "react";
 import useFetch from "../../hooks/useFetch";
 import useFetchDelete from "../../hooks/useFetchDelete";
 import useFetchPut from "../../hooks/useFetchPut";
+import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import dayjs from "dayjs";
 const ModalContent = ({modalType,data, handleClose}) => {
     console.log(data)
     const [projectInfo, setProjectInfo] = useState(
@@ -53,7 +56,8 @@ const ModalContent = ({modalType,data, handleClose}) => {
     //FIX THE ASSIGNED SELECT NOT SHOWING
     return (
         <form onSubmit={() => modalType === 'edit' ? handleUpdate() : handleCreate()}>
-            <DialogContent>              
+            <DialogContent>   
+                    {/* Convert this if else to switch             */}
                     <Box>
                         {
                             modalType === 'edit'
@@ -76,8 +80,16 @@ const ModalContent = ({modalType,data, handleClose}) => {
                                             </Select>
                                         } label={'project_assigned'} labelPlacement="start" sx={{display:'flex', justifyContent:'space-between', paddingTop:'10px'}}/>
                                     )
+                                }else if(key === 'start_date' || key === 'end_date'){
+                                    return (
+                                        <FormControlLabel key={key} control={
+                                            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                                <DatePicker value={dayjs(projectInfo[key])} onChange={(ev) => setProjectInfo({...projectInfo,[key]:ev.$d.toLocaleDateString()})} label="day"  sx={{minWidth:'50%'}}/>
+                                            </LocalizationProvider>
+                                        } label={key} labelPlacement="start" sx={{display:'flex', justifyContent:'space-between', paddingTop:'10px'}}/>
+                                    )
                                 }else{           
-                                                    
+                                        console.log(key)       
                                         return (
                                         <FormControlLabel key={key} control={<TextField value={projectInfo[key]} onChange={event => setProjectInfo({...projectInfo,[key]:event.target.value})} sx={{minWidth:'50%'}} />} label={key} labelPlacement="start" sx={{display:'flex', justifyContent:'space-between', paddingTop:'10px'}}/>)
                                 }
@@ -87,6 +99,25 @@ const ModalContent = ({modalType,data, handleClose}) => {
                                 if(key === 'project_assigned'){
                                     return (
                                         <SelectEmployee key={key} modalType={modalType} projectInfo={projectInfo} setProjectInfo={setProjectInfo} assignedEmployees={null}/>
+                                    )
+                                }else if(key === 'project_status'){
+                                    return (
+                                        <FormControlLabel control={
+                                            <Select onChange={event => setProjectInfo({...projectInfo,[key]:event.target.value})} sx={{minWidth:'50%'}}>
+                                                <MenuItem value={'Not Started'}>{'Not Started'}</MenuItem>
+                                                <MenuItem value={'On Hold'}>{'On Hold'}</MenuItem>
+                                                <MenuItem value={'In Progress'}>{'In Progress'}</MenuItem>
+                                                <MenuItem value={'Completed'}>{'Completed'}</MenuItem>
+                                            </Select>
+                                        } label={'project_assigned'} labelPlacement="start" sx={{display:'flex', justifyContent:'space-between', paddingTop:'10px'}}/>
+                                    )
+                                }else if(key === 'start_date' || key === 'end_date'){
+                                    return (
+                                        <FormControlLabel key={key} control={
+                                            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                                <DatePicker  onChange={(ev) => setProjectInfo({...projectInfo,[key]:ev.$d.toLocaleDateString()})} label={key}  sx={{minWidth:'50%'}}/>
+                                            </LocalizationProvider>
+                                        } label={key} labelPlacement="start" sx={{display:'flex', justifyContent:'space-between', paddingTop:'10px'}}/>
                                     )
                                 }else{           
                                                     
