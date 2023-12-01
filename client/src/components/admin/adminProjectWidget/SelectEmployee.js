@@ -4,7 +4,6 @@ import useFetch from "../../hooks/useFetch";
 
 const SelectEmployee = ({modalType,assignedEmployees,projectInfo,setProjectInfo}) => {
     const [selectedValue, setSelectedValue] = useState(assignedEmployees === null ? [] : assignedEmployees);
-    // const [selectedValue, setSelectedValue] = useState([]);
 
     const [employees] = useFetch(`http://localhost:3000/employees`, 'GET');
 
@@ -12,10 +11,8 @@ const SelectEmployee = ({modalType,assignedEmployees,projectInfo,setProjectInfo}
         console.log(value)
         // console.log(employees)
         setSelectedValue(value)
-        console.log(selectedValue)
         let assigned = value.map(name => {
             const index = employees.findIndex((row) => row.employee_name === name)
-            console.log(employees[index])
             return {employee_id: employees[index]._id, name:name}
         });
         
@@ -29,7 +26,6 @@ const SelectEmployee = ({modalType,assignedEmployees,projectInfo,setProjectInfo}
                     !employees
                     ?null
                     :employees.map((employee) => {
-                        console.log(employee.employee_name)
                         return(
                             // <MenuItem key={employee.employee_name} value={modalType === 'edit' ? employee.employee_name : undefined}>
                             <MenuItem key={employee.employee_name} value={employee.employee_name}>
