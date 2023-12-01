@@ -15,7 +15,7 @@ export const LoginCard = styled.div`
     flex-direction: row;
     min-width:30%;
     max-width:40%;
-    margin-top:60px;
+    margin-top:30px;
     /* border:1px solid black; */
     background-color:#ececec;
     border-radius: 30px;

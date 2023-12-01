@@ -5,8 +5,10 @@ import { Wrapper,LoginCard,CoverImg,Img,LoginForm,Inputs,Input,Submit,SignUp } f
 
 import { useNavigate } from "react-router-dom";
 import {useSignIn} from "react-auth-kit";
+import { Alert, Collapse} from "@mui/material";
 //Redo organization and styling of page
 const LogIn = ({setUserInfo}) => {
+    const [wrongInfo,setWrongInfo] = useState(false)
     const [email, setEmail] = useState('');
     const [password,setPassword] = useState('');
     const login = useSignIn();
@@ -45,8 +47,8 @@ const LogIn = ({setUserInfo}) => {
                     authState: {user: data.user, identifier:data.userInfo.employee_id},
                 });
                 successfullLogin(data.userInfo)
-            } else if(data.data === 'password'){
-                
+            } else if(data.data === 'password' || data.data === 'email'){
+                setWrongInfo(true);
             }
         })
         .catch(error => console.log(error))
@@ -66,7 +68,10 @@ const LogIn = ({setUserInfo}) => {
                         <Submit type="submit" value="Log In"/>
                     </Inputs>
                     <SignUp onClick={() => {handleSignup()}}>Don't have an account? Register your account now!</SignUp>
-                </LoginForm>                
+                    <Collapse in={wrongInfo}>
+                        <Alert severity="error" >Sorry, your email or password is incorrect. Please try again </Alert>   
+                    </Collapse>
+                </LoginForm>     
             </LoginCard>
         </Wrapper>
     )
