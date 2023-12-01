@@ -12,11 +12,9 @@ import AdminNavbar from "./navbars/AdminNavbar";
 import AdminProjectsPage from "./admin/pages/AdminProjectsPage";
 
 function App() {
-  const [userInfo, setUserInfo] = useState({})
-
   const auth = useAuthUser();
   const userType = auth() === null ? 'User' :  auth().user;
-  
+
   
   return (
     <React.Fragment>    
@@ -24,7 +22,7 @@ function App() {
         <Router>        
           {userType === 'User' ? <UserNavbar auth={auth}/> :<AdminNavbar auth={auth}/> }
               <Routes>
-                  <Route path="/login" element={<LogIn setUserInfo={setUserInfo}/>} />
+                  <Route path="/login" element={<LogIn />} />
                   <Route path="/signup" element={<Signup/>} />
                   { userType === 'Admin' 
                     ?(
@@ -38,7 +36,7 @@ function App() {
                       </>
                     )
                     :<Route path="/dashboard" element={ 
-                      <RequireAuth loginPath={'/login'}><UserDashboard userInfo={userInfo}/></RequireAuth>
+                      <RequireAuth loginPath={'/login'}><UserDashboard auth={auth}/></RequireAuth>
                     }/>
                   }
                   

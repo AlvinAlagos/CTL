@@ -8,7 +8,8 @@ import UserToolBar from '../navbars/UserToolBar.js';
 import ProjectWidget from './ProjectWidget';
 import IncomeChartWidget from './IncomeChartWidget.js';
 import ClockinWidget from './ClockinWidget.js';
-const UserDashboard = ({userInfo}) => {
+import UserWidget from './UserWidget.js';
+const UserDashboard = ({auth}) => {
     
     return (
         <DashboardWrapper>
@@ -18,21 +19,27 @@ const UserDashboard = ({userInfo}) => {
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <Item>
                         <CardHeaders variant="h5">Clock in</CardHeaders>
-                        {/* CHECK WHERE TO STORE USER INFO EITHER STATE OR LOCAL */}
-                        <ClockinWidget userInfo={userInfo}/>                  
+                        <ClockinWidget auth={auth}/>                  
                     </Item>
                 </LocalizationProvider>
                 </Grid>
-                <Grid item   xs={12} sm={12} xl={6} style={{ flexGrow: 1 }}>
+                <Grid item xs={12} sm={12} xl={3} style={{ flexGrow: 1 }}>
                     <Item>
-                        <CardHeaders variant="h5">Project Listing</CardHeaders>
-                        <ProjectWidget userInfo={userInfo}/>
+                        <CardHeaders variant="h5">User</CardHeaders>
+                        <UserWidget auth={auth}/>
                     </Item>
                 </Grid>
+                <Grid item xs={12} sm={12} xl={6} style={{ flexGrow: 1 }}>
+                    <Item>
+                        <CardHeaders variant="h5">Project Listing</CardHeaders>
+                        <ProjectWidget auth={auth}/>
+                    </Item>
+                </Grid>
+                
                 <Grid  item  xs={12} sm={12} xl={6} style={{ flexGrow: 1 }}>
                     <Item id="test">
                         <CardHeaders variant="h5">Monthly Income</CardHeaders>
-                        <IncomeChartWidget userInfo={userInfo}/>
+                        <IncomeChartWidget auth={auth}/>
                     </Item>
                 </Grid>
                 

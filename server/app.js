@@ -2,7 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 
 const {registerUser,loginUser} = require('./src/handlers/loginSignupHandlers')
-const {getProjectAssigned,getUserTimesheet,getEmployeeWage,insertClockin} = require('./src/handlers/userDashboardHandler')
+const {getProjectAssigned,getUserTimesheet,getEmployeeWage,insertClockin,getEmployee,getUser} = require('./src/handlers/userDashboardHandler')
 const {searchProject} = require('./src/handlers/projectPageHandler')
 const {
     getAllProjects,
@@ -29,9 +29,11 @@ express()
 .use(express.static('public'))
 .use(express.json())
 
-.get('/projects/:_id/:name', getProjectAssigned)
+.get('/projects/:_id', getProjectAssigned)
 .get('/projects',getAllProjects)
 .get('/timesheet/:_id', getUserTimesheet)
+.get('/user/:_id',getUser)
+.get('/employee/:_id', getEmployee)
 .get('/employee/wage/:_id',getEmployeeWage)
 .get('/employees',getAllEmployees)
 .get('/inventory',getAllInventory)

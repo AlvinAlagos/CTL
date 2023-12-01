@@ -16,7 +16,7 @@ const SelectEmployee = ({modalType,assignedEmployees,projectInfo,setProjectInfo}
         let assigned = value.map(name => {
             const index = employees.findIndex((row) => row.employee_name === name)
             console.log(employees[index])
-            return {_id: employees[index]._id, name:name}
+            return {employee_id: employees[index]._id, name:name}
         });
         
         setProjectInfo({...projectInfo,project_assigned:assigned});

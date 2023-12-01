@@ -1,19 +1,22 @@
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import {CircularProgress} from "@mui/material";
 import { useEffect, useState } from "react";
+import useFetch from "../hooks/useFetch";
 
-const ProjectWidget = () => {
-    const [projectListings, setProjectListings] = useState();
-    useEffect(() => {
-        fetch(`http://localhost:3000/projects/06a783bf-61c7-437d-aee2-2418781bfbe7/Alvin Alagos`, {
-            method: 'GET',
-        })
-        .then(response => response.json())
-        .then(data => setProjectListings(data.data))
-        .catch(error => console.log(error))
-    }, [])
+const ProjectWidget = ({auth}) => {
+    // const [projectListings, setProjectListings] = useState();
+    const [projectListings] = useFetch(`http://localhost:3000/projects/${auth().identifier}`)
+    
+    // useEffect(() => {
+    //     fetch(`http://localhost:3000/projects/06a783bf-61c7-437d-aee2-2418781bfbe7/Alvin Alagos`, {
+    //         method: 'GET',
+    //     })
+    //     .then(response => response.json())
+    //     .then(data => setProjectListings(data.data))
+    //     .catch(error => console.log(error))
+    // }, [])
 
-    console.log(projectListings)
+    console.log(auth().identifier)
     return (
     !projectListings
     ?<CircularProgress/>

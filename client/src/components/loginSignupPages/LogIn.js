@@ -18,7 +18,6 @@ const LogIn = ({setUserInfo}) => {
     }
 
     const successfullLogin = (userInfo) => {
-        setUserInfo({...userInfo})
         navigate("/");
     }
     const handleLogin = (event) => {
@@ -43,7 +42,7 @@ const LogIn = ({setUserInfo}) => {
                     token:data.token,
                     expiresIn:3600,
                     tokenType: "Bearer",
-                    authState: {user: data.user, email:email},
+                    authState: {user: data.user, identifier:data.userInfo.employee_id},
                 });
                 successfullLogin(data.userInfo)
             } else if(data.data === 'password'){

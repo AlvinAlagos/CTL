@@ -2,33 +2,25 @@ import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import { SubmitButton } from '../styles/dashboardStyles/dashboard.styled';
 import { DatePicker } from '@mui/x-date-pickers';
 import { useState } from 'react';
-const ClockinWidget = ({userInfo}) => {
+import useFetchPost from '../hooks/useSearchPost';
+const ClockinWidget = ({auth}) => {
     const [startTime, setStartTime] = useState(null);
     const [endTime, setEndTime] = useState('');
     const [selectedDate, setSelectedDate] = useState('');
-    
+    const [toCreate, setToCreate] = useState(false);
+    const [body, setBody] = useState({});
+    const [createTimestamp] = useFetchPost(`http://localhost:3000/clockin`, 'POST', body, toCreate, setToCreate)
 
     const handleClockin = (event) => {
         event.preventDefault();
         const body = {
-            employee_id:userInfo.employeeId,
-            employee_name: userInfo.fullName,
+            employee_id:auth().identifier,
             start_time: startTime,
             end_time: endTime,
             date: selectedDate,
         }
-        
-        fetch(`http://localhost:3000/clockin`,{
-            method:'POST',
-            headers:{
-                "Accept": "application/json",
-                "Content-Type":"application/json",
-                },
-            body:JSON.stringify(body)
-        })
-        .then(response => response.json())
-        .then(data => console.log(data.data))
-        .catch(error => console.log(error))
+        setBody(body);
+        setToCreate(true);
         
     }
     return(

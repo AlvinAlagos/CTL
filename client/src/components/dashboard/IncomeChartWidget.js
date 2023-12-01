@@ -3,6 +3,7 @@ import { CircularProgress, Paper } from '@mui/material';
 import { useEffect, useState } from 'react';
 import Chart from 'chart.js/auto';
 import {Line} from "react-chartjs-2";
+import useFetch from '../hooks/useFetch';
 const calcHoursDoneInMonths = (data,wage) => {
 
     const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul","Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -35,40 +36,35 @@ const calcHoursDoneInMonths = (data,wage) => {
     return incomeInMonth;
 }
 
-const IncomeChartWidget = () => {
-    const [timesheet, setTimesheet] = useState([]);
+const IncomeChartWidget = ({auth}) => {
+    // const [timesheet, setTimesheet] = useState([]);
     const [monthlyIncome, setMonthlyIncome] = useState([]);
-    const [hoursWokred, setHoursWorked] = useState();
-    const [wage, setWage] = useState('');
+    const [timesheet] = useFetch(`http://localhost:3000/timesheet/${auth().identifier}`,'GET')
+    const [wage] = useFetch(`http://localhost:3000/employee/wage/${auth().identifier}`)
     
-    useEffect(() => {
-        fetch(`http://localhost:3000/employee/wage/06a783bf-61c7-437d-aee2-2418781bfbe7`, {
-            method:'GET'
-        })
-        .then(response => response.json())
-        .then(data => setWage(data.data))
-        .catch(error => console.log(error))
-    },[])
+    // useEffect(() => {
+    //     fetch(`http://localhost:3000/employee/wage/06a783bf-61c7-437d-aee2-2418781bfbe7`, {
+    //         method:'GET'
+    //     })
+    //     .then(response => response.json())
+    //     .then(data => setWage(data.data))
+    //     .catch(error => console.log(error))
+    // },[])
+
+    // useEffect(() => {
+    //     fetch(`http://localhost:3000/timesheet/06a783bf-61c7-437d-aee2-2418781bfbe7`,{
+    //         method:'GET',
+    //     })
+    //     .then(response => response.json())
+    //     .then(data => {
+    //         setTimesheet(data.data)
+    //     })
+    //     .catch(error => console.log(error))
+    // },[])
 
     useEffect(() => {
-        fetch(`http://localhost:3000/timesheet/06a783bf-61c7-437d-aee2-2418781bfbe7`,{
-            method:'GET',
-        })
-        .then(response => response.json())
-        .then(data => {
-            const records = data.data;
-            let totalHours = 0;
-            records.forEach((record) => {
-                totalHours += record.hours_worked;
-            })
-            setHoursWorked(totalHours);
-            setTimesheet(data.data)
-        })
-        .catch(error => console.log(error))
-    },[])
-
-    useEffect(() => {
-        setMonthlyIncome(calcHoursDoneInMonths(timesheet,wage))
+        if(timesheet !== null)
+            setMonthlyIncome(calcHoursDoneInMonths(timesheet,wage))
     },[wage,timesheet])
 
     return (
