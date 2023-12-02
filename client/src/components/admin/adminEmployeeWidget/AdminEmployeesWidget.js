@@ -22,7 +22,7 @@ const AdminEmployeesWidget = ({openModal,setOpenModal,modalType,setModalType}) =
     }
     return (
         <>
-        <Dialog open={openModal} onClose={handleClose} sx={{['& .MuiDialog-paper']: {minWidth:'800px'}}}>
+        <Dialog open={openModal} onClose={handleClose} sx={{['& .MuiDialog-paper']: {minWidth:{xl:'800px', sm:'600px', md:'800px', xs:'200px'}}}}>
             <DialogTitle>Edit</DialogTitle>
             <EmployeeModalContent modalType={modalType} data={rowSelected} handleClose={handleClose}/>           
         </Dialog>

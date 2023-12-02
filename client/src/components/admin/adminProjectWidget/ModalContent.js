@@ -56,8 +56,8 @@ const ModalContent = ({modalType,data, handleClose}) => {
     //FIX THE ASSIGNED SELECT NOT SHOWING
     return (
         <form onSubmit={() => modalType === 'edit' ? handleUpdate() : handleCreate()}>
-            <DialogContent>   
-                    {/* Convert this if else to switch             */}
+            <DialogContent >   
+                    {/* Convert this if else to switch*/}
                     <Box>
                         {
                             modalType === 'edit'
@@ -78,7 +78,7 @@ const ModalContent = ({modalType,data, handleClose}) => {
                                                 <MenuItem value={'In Progress'}>{'In Progress'}</MenuItem>
                                                 <MenuItem value={'Completed'}>{'Completed'}</MenuItem>
                                             </Select>
-                                        } label={'project_assigned'} labelPlacement="start" sx={{display:'flex', justifyContent:'space-between', paddingTop:'10px'}}/>
+                                        } label={'project_status'} labelPlacement="start" sx={{display:'flex', justifyContent:'space-between', paddingTop:'10px'}}/>
                                     )
                                 }else if(key === 'start_date' || key === 'end_date'){
                                     return (
@@ -109,7 +109,7 @@ const ModalContent = ({modalType,data, handleClose}) => {
                                                 <MenuItem value={'In Progress'}>{'In Progress'}</MenuItem>
                                                 <MenuItem value={'Completed'}>{'Completed'}</MenuItem>
                                             </Select>
-                                        } label={'project_assigned'} labelPlacement="start" sx={{display:'flex', justifyContent:'space-between', paddingTop:'10px'}}/>
+                                        } label={'project_status'} labelPlacement="start" sx={{display:'flex', justifyContent:'space-between', paddingTop:'10px'}}/>
                                     )
                                 }else if(key === 'start_date' || key === 'end_date'){
                                     return (

@@ -1,7 +1,8 @@
-import { Box, Button, CircularProgress, Container, Dialog, DialogTitle, FormControl, InputLabel, MenuItem, Paper, Select, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
-import { PageWrapper,Header2,SearchBar,FilterBox,FilterItemsBox } from "../../styles/dashboardStyles/admin/projectPage.styled";
+import { Box, Button, CircularProgress, Collapse, Container, Dialog, DialogTitle, FormControl, Grid, InputLabel, MenuItem, Paper, Select, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
+import { PageWrapper,Header2,SearchBar,FilterBox,FilterItemsBox, SearchBarBox } from "../../styles/dashboardStyles/admin/projectPage.styled";
 import AddIcon from '@mui/icons-material/Add';
 import FilterListIcon from '@mui/icons-material/FilterList';
+import CloseIcon from '@mui/icons-material/Close';
 import SearchIcon from '@mui/icons-material/Search';
 import useFetch from "../../hooks/useFetch";
 import useSearchPost from "../../hooks/useSearchPost";
@@ -22,9 +23,11 @@ const AdminProjectsPage = ({URL}) => {
     const [rowSelected, setRowSelected] = useState({});
     const [openProjectsModal, setOpenProjectsModal] = useState(false);
     const [modalType, setModalType] = useState('create');
-    const [fetchURL, setFetchURL] = useState(URL === undefined ? 'http://localhost:3000/projects' : URL)
-
+    const [fetchURL, setFetchURL] = useState(URL === undefined ? 'http://localhost:3000/projects' : URL);
+    const [openSearch, setOpenSearch] = useState(false);
+    const [defaultProjectListings, setDefaultProjectListings] = useFetch(fetchURL, 'GET');
     const [projectListings, setProjectListings] = useFetch(fetchURL, 'GET');
+
     const [searchValue] = useSearchPost('http://localhost:3000/projects/search', 'POST', {search_input: search},toCreate,setToCreate,setProjectListings);
 
     const parseObject = (data) => {
@@ -38,13 +41,40 @@ const AdminProjectsPage = ({URL}) => {
         }
     }
 
+    const handleExport = () => {
+        let csv = '';
+        const header = Object.keys(projectListings[0]).join(',');
+        const values = projectListings.map(project => (Object.values(project).join(','))).join('\n');
+        csv += header + '\n' + values;
+
+        const element = document.createElement('a');
+        element.setAttribute('href', 'data:text/csv;charset=utf-8,' + encodeURI(csv));
+        element.setAttribute('download', 'ArchivedProjects');
+
+        element.style.display = 'none';
+        document.body.appendChild(element);
+
+        element.click();
+
+        document.body.removeChild(element);
+    }
     const handleClose = () => {
         setOpenProjectsModal(false);
     }
 
     const handleSearch = (event) => {
+
+        if(openSearch === true){
         setSearch(searchInput.current.value)
         setToCreate(true);
+        }else{
+            setOpenSearch(true)
+        }
+    }
+
+    const handleCloseSearch = () => {
+        setOpenSearch(false)
+        setProjectListings(defaultProjectListings)
     }
 
     const handleClick = (row) => {
@@ -71,21 +101,34 @@ const AdminProjectsPage = ({URL}) => {
                 <ModalContent modalType={modalType} data={rowSelected} handleClose={handleClose}/>           
             </Dialog>
             <FilterBox>
-                <Header2 variant="h4">{view}</Header2>
-                <FilterItemsBox>
-                    <FormControl sx={{display:'flex', justifyContent:'center'}}>
-                        <InputLabel id="demo-simple-select-standard-label">View</InputLabel>
-                        <Select label="View"value={view} onChange={(event) => handleViewSelect(event.target.value)} sx={{ maxHeight:'43px', borderRadius:'15px', minWidth:'180px'}}>
-                            <MenuItem value={'Projects'}>Projects</MenuItem>
-                            <MenuItem value={'Archived'}>Archived Projects</MenuItem>
-                        </Select>
-                    </FormControl>
-                    {view === 'Projects' ? <Button onClick={() => {setModalType('create');setOpenProjectsModal('true');}}><AddIcon sx={{color:'#ffa726'}}/></Button> : null}
-                    {/* SEARCH DOES NOT WORK FOR ACHIVED */}
-                    <SearchBar inputRef={searchInput} autoComplete={"false"} /> 
-                    <Button onClick={() => {handleSearch()}}><SearchIcon/></Button>
-                </FilterItemsBox>
-                
+            <Grid container columnSpacing={2} rowSpacing={2} wrap="wrap">
+                <Grid item   xs={12} sm={2} md={2} xl={2} style={{ flexGrow: 1 }}>
+                    <Header2 variant="h4">{view}</Header2>
+                </Grid>
+                <Grid item   xs={12} sm={10} md={10} xl={10} style={{ flexGrow: 1 }} sx={{display:'flex',flexDirection:'row', justifyContent:'end'}}>
+                    <FilterItemsBox>
+                        <FormControl sx={{display:'flex', justifyContent:'center'}}>
+                            <InputLabel id="demo-simple-select-standard-label">View</InputLabel>
+                            <Select label="View"value={view} onChange={(event) => handleViewSelect(event.target.value)} sx={{ maxHeight:'43px', borderRadius:'15px', minWidth:'180px'}}>
+                                <MenuItem value={'Projects'}>Projects</MenuItem>
+                                <MenuItem value={'Archived'}>Archived Projects</MenuItem>
+                            </Select>
+                        </FormControl>
+                        {view === 'Projects' ? <Button onClick={() => {setModalType('create');setOpenProjectsModal('true');}}><AddIcon sx={{color:'#ffa726'}}/></Button> : null}
+                        {/* SEARCH DOES NOT WORK FOR ACHIVED */}
+                    </FilterItemsBox>
+                    {
+                        view === 'Archived'
+                        ?<Button onClick={() => handleExport()} sx={{marginLeft:'20px'}}>Export</Button>
+                        :<SearchBarBox>                   
+                            <Collapse in={openSearch} orientation={"horizontal"}>
+                                    <SearchBar inputRef={searchInput} autoComplete={"false"} InputProps={{endAdornment: <Button onClick={() => {handleCloseSearch()}}><CloseIcon/></Button>}}/> 
+                            </Collapse>
+                            <Button onClick={() => {handleSearch()}}><SearchIcon/></Button>
+                        </SearchBarBox>
+                    }
+                </Grid>
+            </Grid>
             </FilterBox>
             <Box>
                 {

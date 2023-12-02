@@ -80,6 +80,7 @@ export const Submit = styled.input`
     min-height:40px;
     border-radius: 20px;
     margin-top:30px;
+    cursor:pointer;
 `
 
 export const SignUp = styled.a`

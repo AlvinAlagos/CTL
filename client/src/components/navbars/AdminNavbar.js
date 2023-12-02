@@ -15,7 +15,7 @@ const AdminNavbar = ({auth}) => {
     }
     return (
         <NavbarWrapper>
-            <Logo>CTL Inc.</Logo>
+            <Logo href="/">CTL Inc.</Logo>
             {
                 auth() === null
                 ?null
@@ -26,11 +26,10 @@ const AdminNavbar = ({auth}) => {
                     gap:'20px',
                     marginRight:'20px'
                 }}>
-                    <HomeOutlinedIcon/>
-                    <AddAlarmOutlinedIcon/>
-                    <ListAltOutlinedIcon/>
-                    <ShowChartOutlinedIcon/>
-                    <SignoutBtn onClick={() => handleLogOut()}>Sign out</SignoutBtn>                   
+                    <Button onClick={() => navigate('/')}>Dashboard</Button>      
+                    <Button onClick={() => navigate('/projects')}>Projects</Button>                 
+                    <Button onClick={() => navigate('/')}>Timesheet</Button>                 
+                    <Button onClick={() => handleLogOut()} >Sign out</Button>                   
                 </Box>
                 
             }
@@ -47,11 +46,14 @@ const NavbarWrapper = styled.div`
     background-color:#e8b833;
 `
 
-const Logo = styled.h1`
-    margin:auto;
+const Logo = styled.a`
+    font-size:30px;
+    text-decoration: none;
+    color:black;
     width:50%;
 `
-const SignoutBtn = styled.button`
+const Button = styled.button`
+    color:black;
     
 `
 export default AdminNavbar;

@@ -115,7 +115,7 @@ const updateProject = async(request,response) => {
                 project_assigned:body.project_assigned
             }});
             response.status(200).json({status:200, data: result});
-        }else{
+        }else if(body.project_status === 'Completed'){
             const deleteResult = await db.collection('projects').deleteOne({_id: new ObjectId(body._id)});
             const archivedResult = await db.collection('archived_projects').insertOne({
                 project_name: body.project_name,

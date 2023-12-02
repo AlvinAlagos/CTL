@@ -19,7 +19,7 @@ const useFetchPost = (url,method,body,toCreate,setToCreate,setProjectListings) =
             .catch(error => console.log(error))
         }
     },[url,method,body])
-    
+    console.log(data)
     return [data, setData]
 }
 

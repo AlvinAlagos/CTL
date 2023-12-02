@@ -18,8 +18,9 @@ const searchProject = async(request,response) => {
             
             let isSearchIncluded = false;
             Object.keys(result[index]).forEach((column) => {
-                if(column === 'project_assigned'  && result[index][column] !== null){
-                    
+                
+                if(column === 'project_assigned'  && result[index][column] !== null){   
+                    // console.log(result[index][column])
                     result[index][column].map((employee) => {        
                         console.log(employee.employee_id)               
                         const columnId = ((employee.employee_id).replace(/ /g,'')).toLowerCase() ;   

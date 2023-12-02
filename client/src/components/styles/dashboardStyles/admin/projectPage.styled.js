@@ -16,7 +16,7 @@ export const FilterBox = styled(Box)(({theme}) => ({
     display:'flex',
     flexDirection:'row',
     justifyContent:'space-between',
-    
+    flexWrap:'wrap'
 }))
 
 export const FilterItemsBox = styled(Box)(({theme}) => ({
@@ -29,6 +29,12 @@ export const Header2 = styled(Typography)(({theme}) => ({
     textAlign:'left'
 }));
 
+export const SearchBarBox = styled(Box)(({theme}) => ({
+    display:'flex',
+    justifyContent:'end',
+    alignItems: 'end',
+   
+}))
 export const SearchBar = styled(TextField)(({theme}) => ({
     
     display:'flex', 
@@ -43,5 +49,20 @@ export const SearchBar = styled(TextField)(({theme}) => ({
     },
     ['& .MuiOutlinedInput-input']:{
         maxHeight:'10px',
+    },
+    [theme.breakpoints.only('xs')]: {
+        ['&.MuiTextField-root']:{
+            minWidth:'100px',          
+        }
+    },
+    [theme.breakpoints.only('sm')]: {
+        ['&.MuiTextField-root']:{
+            minWidth:'50px',          
+        }
+    },
+    [theme.breakpoints.only('md')]: {
+        ['&.MuiTextField-root']:{
+            minWidth:'300px',          
+        }
     }
 }));

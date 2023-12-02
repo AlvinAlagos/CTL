@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {  BrowserRouter as Router, Routes, Route, BrowserRouter } from "react-router-dom";
+import {  BrowserRouter as Router, Routes, Route, BrowserRouter, Navigate } from "react-router-dom";
 import UserNavbar from "./navbars/UserNavbar";
 import { RequireAuth } from 'react-auth-kit';
 import {useAuthUser} from 'react-auth-kit'
@@ -35,11 +35,14 @@ function App() {
                         }/>
                       </>
                     )
-                    :<Route path="/dashboard" element={ 
+                    :<Route path="/" element={ 
                       <RequireAuth loginPath={'/login'}><UserDashboard auth={auth}/></RequireAuth>
                     }/>
                   }
-                  
+                  <Route
+                    path="*"
+                    element={<Navigate to="/" replace />}
+                  />
                 </Routes>
         </Router>
     </React.Fragment>

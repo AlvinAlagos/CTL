@@ -1,10 +1,7 @@
 import styled from "styled-components"
 import { useSignOut } from 'react-auth-kit'
 import { useNavigate } from "react-router-dom";
-import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
-import AddAlarmOutlinedIcon from '@mui/icons-material/AddAlarmOutlined';
-import ListAltOutlinedIcon from '@mui/icons-material/ListAltOutlined';
-import ShowChartOutlinedIcon from '@mui/icons-material/ShowChartOutlined';
+import LogoutIcon from '@mui/icons-material/Logout';
 import { Box } from "@mui/material";
 const UserNavbar = ({auth}) => {
     const signOut = useSignOut();
@@ -26,10 +23,7 @@ const UserNavbar = ({auth}) => {
                     gap:'20px',
                     marginRight:'20px'
                 }}>
-                    <HomeOutlinedIcon/>
-                    <AddAlarmOutlinedIcon/>
-                    <ListAltOutlinedIcon/>
-                    <ShowChartOutlinedIcon/>
+
                     <SignoutBtn onClick={() => handleLogOut()}>Sign out</SignoutBtn>                   
                 </Box>
                 

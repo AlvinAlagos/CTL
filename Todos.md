@@ -10,3 +10,6 @@
 * See if you can implement useContext and useReducer
 * Create custom hooks for fetch (DONE)
 * Create Client user prof (Done)
+
+* Fixed home routing and routes (DOne)
+* When deleting employee has to do delete user as well
