@@ -1,14 +1,12 @@
 import { Box, Button, DialogActions, DialogContent, FormControlLabel, MenuItem, Select, TextField } from "@mui/material";
 import SelectEmployee from "./SelectEmployee";
 import { useState } from "react";
-import useFetch from "../../hooks/useFetch";
 import useFetchDelete from "../../hooks/useFetchDelete";
 import useFetchPut from "../../hooks/useFetchPut";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
 const ModalContent = ({modalType,data, handleClose}) => {
-    console.log(data)
     const [projectInfo, setProjectInfo] = useState(
         {
             _id: data._id,
@@ -45,24 +43,14 @@ const ModalContent = ({modalType,data, handleClose}) => {
         setToCreate(true);
     }
 
-    const handleSelect = (value) => {
-        console.log(value)
-        // console.log(employees)
-        setSelectedValue(value)
-        
-        
-    };
-    console.log(projectInfo)
-    //FIX THE ASSIGNED SELECT NOT SHOWING
     return (
         <form onSubmit={() => modalType === 'edit' ? handleUpdate() : handleCreate()}>
             <DialogContent >   
-                    {/* Convert this if else to switch*/}
+                    {/* Convert this myabe if else to switch*/}
                     <Box>
                         {
                             modalType === 'edit'
-                            ?Object.keys(data).map((key) => {         
-                                console.log('here edit')                       
+                            ?Object.keys(data).map((key) => {                        
                                 if(key === 'project_assigned'){
                                     return (
                                         data[key] === null
@@ -89,13 +77,11 @@ const ModalContent = ({modalType,data, handleClose}) => {
                                         } label={key} labelPlacement="start" sx={{display:'flex', justifyContent:'space-between', paddingTop:'10px'}}/>
                                     )
                                 }else{           
-                                        console.log(key)       
                                         return (
                                         <FormControlLabel key={key} control={<TextField value={projectInfo[key]} onChange={event => setProjectInfo({...projectInfo,[key]:event.target.value})} sx={{minWidth:'50%'}} />} label={key} labelPlacement="start" sx={{display:'flex', justifyContent:'space-between', paddingTop:'10px'}}/>)
                                 }
                             })
-                            :Object.keys(projectInfo).map((key) => {               
-                                console.log('here')                
+                            :Object.keys(projectInfo).map((key) => {                      
                                 if(key === 'project_assigned'){
                                     return (
                                         <SelectEmployee key={key} modalType={modalType} projectInfo={projectInfo} setProjectInfo={setProjectInfo} assignedEmployees={null}/>

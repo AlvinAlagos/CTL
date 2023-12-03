@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import AddAlarmOutlinedIcon from '@mui/icons-material/AddAlarmOutlined';
 import ListAltOutlinedIcon from '@mui/icons-material/ListAltOutlined';
-import ShowChartOutlinedIcon from '@mui/icons-material/ShowChartOutlined';
+import LogoutIcon from '@mui/icons-material/Logout';
 import styled from "styled-components"
 import { Box } from "@mui/material";
 const AdminNavbar = ({auth}) => {
@@ -13,6 +13,8 @@ const AdminNavbar = ({auth}) => {
         signOut();
         navigate('/login');
     }
+
+    
     return (
         <NavbarWrapper>
             <Logo href="/">CTL Inc.</Logo>
@@ -26,10 +28,10 @@ const AdminNavbar = ({auth}) => {
                     gap:'20px',
                     marginRight:'20px'
                 }}>
-                    <Button onClick={() => navigate('/')}>Dashboard</Button>      
-                    <Button onClick={() => navigate('/projects')}>Projects</Button>                 
-                    <Button onClick={() => navigate('/')}>Timesheet</Button>                 
-                    <Button onClick={() => handleLogOut()} >Sign out</Button>                   
+                    { window.innerWidth > 760 ? <Button onClick={() => navigate('/')}>Dashboard</Button> :<Button onClick={() => navigate('/')}><HomeOutlinedIcon/></Button> }      
+                    { window.innerWidth > 760 ? <Button onClick={() => navigate('/projects')}>Projects</Button> : <Button onClick={() => navigate('/projects')}><ListAltOutlinedIcon/></Button>}                  
+                    { window.innerWidth > 760 ? <Button onClick={() => navigate('/')}>Timesheet</Button>: <Button onClick={() => navigate('//')}><AddAlarmOutlinedIcon/></Button> }                
+                    { window.innerWidth > 760 ? <Button onClick={() => handleLogOut()}>Signout</Button>: <Button onClick={() =>  handleLogOut()}><LogoutIcon/></Button> }                                 
                 </Box>
                 
             }

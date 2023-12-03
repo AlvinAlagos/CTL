@@ -16,7 +16,6 @@ const getAllProjects = async(request,response) => {
         response.status(200).json({status:200, data: result});
 
     }catch(error){
-        console.log(error)
         response.status(400).json({status:400,data: 'fail'});
     }finally{
         client.close()
@@ -35,7 +34,6 @@ const getAllEmployees = async(request, response) => {
         response.status(200).json({status:200, data: result});
 
     }catch(error){
-        console.log(error)
         response.status(400).json({status:400,data: 'fail'});
     }finally{
         client.close()
@@ -140,7 +138,6 @@ const updateProject = async(request,response) => {
 const deleteProjects = async(request,response) => {
     const client = new MongoClient(MONGO_URI, options);
     const _id = request.params._id;
-    console.log(_id)
     try{
         await client.connect();
         const db = client.db("CTL");
@@ -203,7 +200,6 @@ const updateEmployee = async(request,response) => {
 const deleteEmployee = async(request,response) => {
     const client = new MongoClient(MONGO_URI, options);
     const _id = request.params._id;
-    console.log(_id)
     try{
         await client.connect();
         const db = client.db("CTL");
@@ -228,7 +224,6 @@ const getAllInventory = async(request,response) => {
         response.status(200).json({status:200, data: result});
 
     }catch(error){
-        console.log(error)
         response.status(400).json({status:400,data: 'fail'});
     }finally{
         client.close()
@@ -288,7 +283,6 @@ const updateInventory = async(request,response) => {
 const deleteInventory = async(request,response) => {
     const client = new MongoClient(MONGO_URI, options);
     const _id = request.params._id;
-    console.log(_id)
     try{
         await client.connect();
         const db = client.db("CTL");
@@ -314,7 +308,6 @@ const getAllArchived = async(request,response) => {
         response.status(200).json({status:200, data: result});
 
     }catch(error){
-        console.log(error)
         response.status(400).json({status:400,data: 'fail'});
     }finally{
         client.close()
@@ -332,7 +325,6 @@ const deleteArchived = async(request, response) => {
         response.status(200).json({status:200, data: result});
 
     }catch(error){
-        console.log(error)
         response.status(400).json({status:400,data: 'fail'});
     }finally{
         client.close()

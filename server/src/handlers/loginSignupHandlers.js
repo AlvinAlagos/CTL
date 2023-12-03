@@ -57,7 +57,6 @@ const loginUser = async(request,response) => {
         const {email, password} = body;
         const db = client.db("CTL");
         const matchedUser = await db.collection('users').findOne({email:email})
-        console.log(matchedUser)
         if(matchedUser !== null){
             const isValid = await bcrypt.compare(password, matchedUser.password);
             
@@ -84,7 +83,6 @@ const loginUser = async(request,response) => {
             response.status(401).json({status:401,data: "email"});
         }
     }catch(error){
-        console.log(error)
         response.status(400).json({status:400,data: error});
     }finally{
         client.close()

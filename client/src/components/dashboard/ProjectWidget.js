@@ -8,7 +8,6 @@ const ProjectWidget = ({auth}) => {
     const [projectListings] = useFetch(`http://localhost:3000/projects/${auth().identifier}`)
 
 
-    console.log(auth().identifier)
     return (
     !projectListings
     ?<CircularProgress/>

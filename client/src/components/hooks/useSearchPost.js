@@ -4,7 +4,6 @@ const useFetchPost = (url,method,body,toCreate,setToCreate,setProjectListings) =
     const [data,setData] = useState(null);
 
     useEffect(() => {
-        console.log('called')
         if(toCreate === true){           
             fetch(url,{
                 method:method,
@@ -19,7 +18,7 @@ const useFetchPost = (url,method,body,toCreate,setToCreate,setProjectListings) =
             .catch(error => console.log(error))
         }
     },[url,method,body])
-    console.log(data)
+
     return [data, setData]
 }
 

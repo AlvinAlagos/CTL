@@ -38,7 +38,6 @@ const LogIn = ({setUserInfo}) => {
         })
         .then(res => res.json())
         .then(data => {
-            console.log(data)
             if(data.data === 'success'){
                 login({
                     token:data.token,

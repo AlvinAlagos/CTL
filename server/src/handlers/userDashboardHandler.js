@@ -7,7 +7,7 @@ const options = {
 const getProjectAssigned = async(request,response) => {
     const client = new MongoClient(MONGO_URI, options);
     const {_id} = request.params;
-    console.log(_id)
+
     try{
         await client.connect();
         const db = client.db("CTL");
@@ -18,7 +18,6 @@ const getProjectAssigned = async(request,response) => {
         response.status(200).json({status:200, data: result});
 
     }catch(error){
-        console.log(error)
         response.status(400).json({status:400,data: 'fail'});
     }finally{
         client.close()
@@ -36,7 +35,6 @@ const getUser = async(request,response) => {
 
         response.status(200).json({status:200, data: result});
     }catch(error){
-        console.log(error)
         response.status(400).json({status:400,data: 'fail'});
     }finally{
         client.close()
@@ -54,7 +52,6 @@ const getEmployee = async(request,response) => {
 
         response.status(200).json({status:200, data: result});
     }catch(error){
-        console.log(error)
         response.status(400).json({status:400,data: 'fail'});
     }finally{
         client.close()
@@ -71,7 +68,6 @@ const getEmployeeWage = async(request,response) => {
         response.status(200).json({status:200, data: result[0].hourly_wage});
 
     }catch(error){
-        console.log(error)
         response.status(400).json({status:400,data: 'fail'});
     }finally{
         client.close()
@@ -81,7 +77,6 @@ const getEmployeeWage = async(request,response) => {
 const getUserTimesheet = async(request,response) => {
     const client = new MongoClient(MONGO_URI, options);
     const {_id} = request.params;
-    console.log(_id)
     try{
         await client.connect();
         const db = client.db("CTL");
@@ -92,7 +87,6 @@ const getUserTimesheet = async(request,response) => {
         response.status(200).json({status:200, data: result});
 
     }catch(error){
-        console.log(error)
         response.status(400).json({status:400,data: 'fail'});
     }finally{
         client.close()
@@ -117,7 +111,6 @@ const insertClockin = async(request,response) => {
         });
         response.status(200).json({status:200, data: result});
     }catch(error){
-        console.log(error)
         response.status(400).json({status:400,data: 'fail'});
     }finally{
         client.close()

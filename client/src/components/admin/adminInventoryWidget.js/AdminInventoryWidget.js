@@ -1,6 +1,6 @@
 import { Button, Dialog, DialogTitle,Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, } from "@mui/material";
 import {CircularProgress} from "@mui/material";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import useFetch from "../../hooks/useFetch";
 import InventoryModalContent from "./InventoryModalContent";
 const AdminInventoryWidget = ({openModal,setOpenModal,modalType,setModalType}) => {
@@ -43,7 +43,7 @@ const AdminInventoryWidget = ({openModal,setOpenModal,modalType,setModalType}) =
                     <TableBody>
                         {
                                 inventoryListings.map((row) => {
-                                    console.log(row)
+
                                 return (<TableRow key={row._id}sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                                 <TableCell component="th" scope="row">
                                     <Button onClick={() => {handleClick(row)}} sx={{textAlign:'left'}}>{row._id}</Button>

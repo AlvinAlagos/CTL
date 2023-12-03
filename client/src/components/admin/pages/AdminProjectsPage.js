@@ -1,12 +1,11 @@
-import { Box, Button, CircularProgress, Collapse, Container, Dialog, DialogTitle, FormControl, Grid, InputLabel, MenuItem, Paper, Select, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
+import { Box, Button, CircularProgress, Collapse,Dialog, DialogTitle, FormControl, Grid, InputLabel, MenuItem, Paper, Select, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
 import { PageWrapper,Header2,SearchBar,FilterBox,FilterItemsBox, SearchBarBox } from "../../styles/dashboardStyles/admin/projectPage.styled";
 import AddIcon from '@mui/icons-material/Add';
-import FilterListIcon from '@mui/icons-material/FilterList';
 import CloseIcon from '@mui/icons-material/Close';
 import SearchIcon from '@mui/icons-material/Search';
 import useFetch from "../../hooks/useFetch";
 import useSearchPost from "../../hooks/useSearchPost";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import ModalContent from "../adminProjectWidget/ModalContent";
 
 /**
@@ -93,7 +92,7 @@ const AdminProjectsPage = ({URL}) => {
             setFetchURL('http://localhost:3000/archived')
         }
     }
-    console.log(projectListings)
+
     return (
         <PageWrapper>
             <Dialog open={openProjectsModal} onClose={handleClose} sx={{['& .MuiDialog-paper']: {minWidth:'800px'}}}>
@@ -103,7 +102,7 @@ const AdminProjectsPage = ({URL}) => {
             <FilterBox>
             <Grid container columnSpacing={2} rowSpacing={2} wrap="wrap">
                 <Grid item   xs={12} sm={2} md={2} xl={2} style={{ flexGrow: 1 }}>
-                    <Header2 variant="h4">{view}</Header2>
+                    <Header2 variant="h4" >{view}</Header2>
                 </Grid>
                 <Grid item   xs={12} sm={10} md={10} xl={10} style={{ flexGrow: 1 }} sx={{display:'flex',flexDirection:'row', justifyContent:'end'}}>
                     <FilterItemsBox>
@@ -115,7 +114,7 @@ const AdminProjectsPage = ({URL}) => {
                             </Select>
                         </FormControl>
                         {view === 'Projects' ? <Button onClick={() => {setModalType('create');setOpenProjectsModal('true');}}><AddIcon sx={{color:'#ffa726'}}/></Button> : null}
-                        {/* SEARCH DOES NOT WORK FOR ACHIVED */}
+                        
                     </FilterItemsBox>
                     {
                         view === 'Archived'
@@ -134,7 +133,9 @@ const AdminProjectsPage = ({URL}) => {
                 {
                 !projectListings
                 ?<CircularProgress/>
-                :<TableContainer component={Paper} sx={{maxHeight:"1000px", marginTop:'30px',}}>
+                :
+                projectListings.length > 0
+                ?<TableContainer component={Paper} sx={{maxHeight:"1000px", marginTop:'30px',}}>
                     <Table sx={{ minWidth: 650, minHeight:'100%' }} size="small" aria-label="a dense table">
                         <TableHead>
                             <TableRow>
@@ -152,7 +153,7 @@ const AdminProjectsPage = ({URL}) => {
                                     projectListings.map((row) => {    
                                     return (<TableRow key={row._id}sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                                     <TableCell component="th" scope="row">
-                                        <Button onClick={() => handleClick(row)}>{row._id}</Button>
+                                        {view === 'Projects' ?<Button onClick={() => handleClick(row)}>{row._id}</Button> : row._id}
                                     </TableCell>
                                     <TableCell align="left">{row.project_name}</TableCell>
                                     <TableCell align="left"><a href="#">{(row.project_description).slice(0,30)}...</a></TableCell>
@@ -169,7 +170,9 @@ const AdminProjectsPage = ({URL}) => {
                             }
                         </TableBody>
                     </Table>
-                </TableContainer>}
+                </TableContainer>
+                :<Typography variant="h4" sx={{textAlign:'center', marginTop:'50px', color:'gray'}}>Nothing to see here</Typography>
+                }
             </Box>
         </PageWrapper>
     )

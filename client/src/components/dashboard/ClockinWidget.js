@@ -11,8 +11,7 @@ const ClockinWidget = ({auth}) => {
     const [body, setBody] = useState({});
     const [createTimestamp] = useFetchPost(`http://localhost:3000/clockin`, 'POST', body, toCreate, setToCreate)
 
-    const handleClockin = (event) => {
-        event.preventDefault();
+    const handleClockin = () => {
         const body = {
             employee_id:auth().identifier,
             start_time: startTime,
@@ -24,7 +23,7 @@ const ClockinWidget = ({auth}) => {
         
     }
     return(
-        <form onSubmit={(event) => handleClockin(event)}>           
+        <form onSubmit={() => handleClockin()}>           
             <TimePicker ampm={false}  onChange={(ev) => setStartTime(ev.$d.toLocaleTimeString('en-GB',{hour: '2-digit', minute:'2-digit'}))} label="Start"/>
             <TimePicker ampm={false}  onChange={(ev) => setEndTime(ev.$d.toLocaleTimeString('en-GB', {hour: '2-digit', minute:'2-digit'}))} label="End"/>
             <DatePicker onChange={(ev) => setSelectedDate(ev.$d.toLocaleDateString())} label="day" />

@@ -1,5 +1,5 @@
 import { FormControlLabel, MenuItem, Select } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import useFetch from "../../hooks/useFetch";
 
 const SelectEmployee = ({modalType,assignedEmployees,projectInfo,setProjectInfo}) => {
@@ -8,8 +8,6 @@ const SelectEmployee = ({modalType,assignedEmployees,projectInfo,setProjectInfo}
     const [employees] = useFetch(`http://localhost:3000/employees`, 'GET');
 
     const handleSelect = (value) => {
-        console.log(value)
-        // console.log(employees)
         setSelectedValue(value)
         let assigned = value.map(name => {
             const index = employees.findIndex((row) => row.employee_name === name)
@@ -27,7 +25,6 @@ const SelectEmployee = ({modalType,assignedEmployees,projectInfo,setProjectInfo}
                     ?null
                     :employees.map((employee) => {
                         return(
-                            // <MenuItem key={employee.employee_name} value={modalType === 'edit' ? employee.employee_name : undefined}>
                             <MenuItem key={employee.employee_name} value={employee.employee_name}>
                                 {employee.employee_name}
                             </MenuItem>

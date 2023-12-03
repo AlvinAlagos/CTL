@@ -1,11 +1,10 @@
 import {Button, Dialog, DialogTitle,Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow,} from "@mui/material";
 import {CircularProgress} from "@mui/material";
-import { useEffect, useState } from "react";
+import {useState } from "react";
 import useFetch from "../../hooks/useFetch";
 import ArchivedModalContent from "./ArchivedModalContent";
 
 const AdminArchivedWidget = ({openModal,setOpenModal,modalType, setModalType}) => {
-      //const [projectListings, setProjectListings] = useState();
     const [rowSelected, setRowSelected] = useState({});
     const [archivedListing, setArchivedListings] = useFetch('http://localhost:3000/archived', 'GET');
     const handleClose = () => {

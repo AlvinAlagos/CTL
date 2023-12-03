@@ -1,4 +1,4 @@
-import { Box, Button, DialogActions, DialogContent, FormControlLabel, MenuItem, Select, TextField } from "@mui/material";
+import { Box, Button, DialogActions, DialogContent, FormControlLabel,TextField } from "@mui/material";
 import { useState } from "react";
 import useFetchDelete from "../../hooks/useFetchDelete";
 import useFetchPut from "../../hooks/useFetchPut";
@@ -36,7 +36,6 @@ const InventoryModalContent = ({modalType,data,handleClose}) => {
         setToCreate(true)
     }
 
-    console.log(inventoryInfo)
     return (
         <form onSubmit={(event) => {modalType === 'edit' ? handleUpdate(event) : handleCreate(event)}}>
             <DialogContent>              

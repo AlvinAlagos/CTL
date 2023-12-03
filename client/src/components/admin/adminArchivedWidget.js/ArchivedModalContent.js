@@ -1,10 +1,8 @@
 import { Box, Button, DialogActions, DialogContent, FormControlLabel, MenuItem, Select, TextField } from "@mui/material";
 import { useState } from "react";
-import useFetch from "../../hooks/useFetch";
 import useFetchDelete from "../../hooks/useFetchDelete";
-import useFetchPut from "../../hooks/useFetchPut";
 
-const ArchivedModalContent = ({modalType,data, handleClose}) => {
+const ArchivedModalContent = ({data, handleClose}) => {
     const [projectInfo, setProjectInfo] = useState(
         {
             _id: data._id,
@@ -20,36 +18,20 @@ const ArchivedModalContent = ({modalType,data, handleClose}) => {
             project_assigned:data.project_assigned
         } 
     );
-    const [selectedValue, setSelectedValue] = useState('');
     const [toDelete, setToDelete] = useState(false);
-    const [toUpdate, setToUpdate] = useState(false);
-    const [toCreate, setToCreate] = useState(false);
     const [deleteConfirmation] = useFetchDelete(`http://localhost:3000/archived/${data._id}`, 'DELETE', toDelete, setToDelete)
-    // const [updateConfirmation] = useFetchPut(`http://localhost:3000/projects/`, 'PUT',projectInfo, toUpdate, setToUpdate)
-    // const [createConfirmation] = useFetchPut(`http://localhost:3000/projects/`, 'POST',projectInfo, toCreate, setToCreate)
 
-    //PUT CONFIRM SCREEN
     const handleDelete = () => {
         handleClose();
         setToDelete(true);
     }
 
-    //Not SURE if update is needed since it
-    const handleUpdate = () => {   
-        // setToUpdate(true);   
-    }
-    const handleCreate = () => {
-        setToCreate(true);
-    }
-
-    //FIX THE ASSIGNED SELECT NOT SHOWING
     return (
-        <form onSubmit={() => modalType === 'edit' ? handleUpdate() : handleCreate()}>
+        <form>
             <DialogContent>              
                     <Box>
                         {
-                            Object.keys(data).map((key) => {         
-                                console.log('here edit')                       
+                            Object.keys(data).map((key) => {                        
                                 if(key === 'project_assigned'){
                                 }else if(key === 'project_status'){
                                     return (
@@ -62,8 +44,7 @@ const ArchivedModalContent = ({modalType,data, handleClose}) => {
                                             </Select>
                                         } label={'project_assigned'} labelPlacement="start" sx={{display:'flex', justifyContent:'space-between', paddingTop:'10px'}}/>
                                     )
-                                }else{           
-                                                    
+                                }else{                                                               
                                         return (
                                         <FormControlLabel key={key} control={<TextField value={projectInfo[key]} onChange={event => setProjectInfo({...projectInfo,[key]:event.target.value})} sx={{minWidth:'50%'}} disabled={true}/>} label={key} labelPlacement="start" sx={{display:'flex', justifyContent:'space-between', paddingTop:'10px'}}/>)
                                 }

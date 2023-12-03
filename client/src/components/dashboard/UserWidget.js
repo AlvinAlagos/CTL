@@ -4,7 +4,6 @@ import useFetch from "../hooks/useFetch";
 const UserWidget = ({auth}) => {
     const [employeeInfo] = useFetch(`http://localhost:3000/employee/${auth().identifier}`)
     const [userInfo] = useFetch(`http://localhost:3000/user/${auth().identifier}`)
-    console.log(userInfo)
     return (
         <Box>
 

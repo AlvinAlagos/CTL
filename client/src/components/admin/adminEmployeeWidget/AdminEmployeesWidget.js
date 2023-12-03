@@ -1,6 +1,6 @@
 import { Button, Dialog, DialogTitle,Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, } from "@mui/material";
 import {CircularProgress} from "@mui/material";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import useFetch from "../../hooks/useFetch";
 import EmployeeModalContent from "./EmployeeModalContent";
 

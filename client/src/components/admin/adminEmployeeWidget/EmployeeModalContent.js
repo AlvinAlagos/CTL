@@ -32,7 +32,6 @@ const EmployeeModalContent = ({modalType,data,handleClose}) => {
         setToCreate(true)
     }
 
-    console.log(employeeInfo)
     return (
         <form onSubmit={() => {modalType === 'edit' ? handleUpdate() : handleCreate()}}>
             <DialogContent>              

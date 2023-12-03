@@ -4,7 +4,6 @@ import { Item, DashboardWrapper, CardHeaders} from "../styles/dashboardStyles/da
 import Grid from '@mui/material/Grid';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import UserToolBar from '../navbars/UserToolBar.js';
 import ProjectWidget from './ProjectWidget';
 import IncomeChartWidget from './IncomeChartWidget.js';
 import ClockinWidget from './ClockinWidget.js';
@@ -13,7 +12,6 @@ const UserDashboard = ({auth}) => {
     
     return (
         <DashboardWrapper>
-            <UserToolBar/>
             <Grid container columnSpacing={2} rowSpacing={2} wrap="wrap" padding="50px" sx={{justifyContent:'center'}}>
                 <Grid item  xs={12} sm={12} xl={3} style={{ flexGrow: 1 }}>               
                     <LocalizationProvider dateAdapter={AdapterDayjs}>

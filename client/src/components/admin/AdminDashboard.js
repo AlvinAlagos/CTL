@@ -1,5 +1,4 @@
 import { Button, Grid, Link } from "@mui/material";
-import UserToolBar from "../navbars/UserToolBar";
 import { CardHeaders, DashboardWrapper, Item } from "../styles/dashboardStyles/dashboard.styled";
 import AdminProjectsWidget from "../admin/adminProjectWidget/AdminProjectsWidget";
 import AdminEmployeesWidget from "./adminEmployeeWidget/AdminEmployeesWidget";
@@ -18,7 +17,6 @@ const AdminDashboard = () => {
     const navigate = useNavigate();
     return (
         <DashboardWrapper>
-            <UserToolBar/>
             <Grid container columnSpacing={2} rowSpacing={2} wrap="wrap" padding="50px" sx={{justifyContent:'center'}}>
                 <Grid item   xs={12} sm={12} xl={6} style={{ flexGrow: 1 }}>
                     <Item>

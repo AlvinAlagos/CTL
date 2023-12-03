@@ -13,33 +13,33 @@ const searchProject = async(request,response) => {
         await client.connect();
         const db = client.db("CTL");
         const result = await db.collection('projects').find().toArray();
-        
-        for(let index = 0; index < result.length; index++){
-            
-            let isSearchIncluded = false;
-            Object.keys(result[index]).forEach((column) => {
+        if(result.length > 0){
+            for(let index = 0; index < result.length; index++){
                 
-                if(column === 'project_assigned'  && result[index][column] !== null){   
-                    // console.log(result[index][column])
-                    result[index][column].map((employee) => {        
-                        console.log(employee.employee_id)               
-                        const columnId = ((employee.employee_id).replace(/ /g,'')).toLowerCase() ;   
-                        const columnName = ((employee.name).replace(/ /g,'')).toLowerCase();           
-                        if(columnId.includes(searchInput) || columnName.includes(searchInput)){
+                let isSearchIncluded = false;
+                Object.keys(result[index]).forEach((column) => {
+                    
+                    if(column === 'project_assigned'  && result[index][column] !== null){   
+                        
+                        result[index][column].map((employee) => {        
+                            const columnId = ((employee.employee_id).replace(/ /g,'')).toLowerCase() ;   
+                            const columnName = ((employee.name).replace(/ /g,'')).toLowerCase();           
+                            if(columnId.includes(searchInput) || columnName.includes(searchInput)){
+                                isSearchIncluded = true;
+                            }
+                        })
+                    }else if(result[index][column] !== null){
+                        const columnValue = column !== '_id' ? (result[index][column].replace(/ /g,'')).toLowerCase() : (result[index][column].toString().replace(/ /g,'')).toLowerCase();                             
+                        if(columnValue.includes(searchInput)){
                             isSearchIncluded = true;
                         }
-                    })
-                }else{
-                    const columnValue = column !== '_id' ? (result[index][column].replace(/ /g,'')).toLowerCase() : (result[index][column].toString().replace(/ /g,'')).toLowerCase();                             
-                    if(columnValue.includes(searchInput)){
-                        isSearchIncluded = true;
                     }
+                })
+                
+                if(isSearchIncluded){               
+                    results.push(result[index])
+                    isSearchIncluded = false;
                 }
-            })
-            
-            if(isSearchIncluded){               
-                results.push(result[index])
-                isSearchIncluded = false;
             }
         }
 

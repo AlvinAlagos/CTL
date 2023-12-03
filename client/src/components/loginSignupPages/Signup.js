@@ -26,7 +26,6 @@ const Signup = () => {
             password,
             confirmPassword
         }
-        console.log(body)
         fetch('http://localhost:3000/register',{
             method:"POST",
             headers:{
@@ -37,7 +36,6 @@ const Signup = () => {
         })
         .then(res => res.json())
         .then(data => {
-            console.log(data)
             if(data.data === 'success'){
                 navigate('/login')
             } else if(data.data === 'password'){
@@ -72,7 +70,7 @@ const Signup = () => {
                         
                     </Inputs>
                     
-                    <SignUp>Already have an account? Log in now!</SignUp>
+                    <SignUp href="/login">Already have an account? Log in now!</SignUp>
                 </LoginForm>                
                 <CoverImg>
                     <Img src={signupImg}/>
