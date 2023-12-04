@@ -23,7 +23,7 @@ The user dashboard consists of 5 widgets with each having their unique purpose t
 I feel there's still alot more to do with this web app and that I've barely touched the surface of what I want it to be. I plan to re-work the application after the bootcamp since I built it under pressure since there was a tight deadline compared to the vast ideas I wanted to implement. But, the tight deadline was good practice of simulating crunch time and I'm still happy with what I was able to do under two weeks, it was a fun project.
 
 Link to web app: [CTL INC](https://ctl.vercel.app/login)
-
+** CORS Blocking fetches not working for now **
 ### Test employee credentials: 
  * User: alvin@hotmail.com
  * pass: test123
