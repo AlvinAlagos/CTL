@@ -59,7 +59,7 @@ const ModalContent = ({modalType,data, handleClose}) => {
                                     )
                                 }else if(key === 'project_status'){
                                     return (
-                                        <FormControlLabel control={
+                                        <FormControlLabel key={key} control={
                                             <Select value={projectInfo[key]} onChange={event => setProjectInfo({...projectInfo,[key]:event.target.value})} sx={{minWidth:'50%'}}>
                                                 <MenuItem value={'Not Started'}>{'Not Started'}</MenuItem>
                                                 <MenuItem value={'On Hold'}>{'On Hold'}</MenuItem>
@@ -88,8 +88,8 @@ const ModalContent = ({modalType,data, handleClose}) => {
                                     )
                                 }else if(key === 'project_status'){
                                     return (
-                                        <FormControlLabel control={
-                                            <Select onChange={event => setProjectInfo({...projectInfo,[key]:event.target.value})} sx={{minWidth:'50%'}}>
+                                        <FormControlLabel key={key} control={
+                                            <Select defaultValue="Not Started" onChange={event => setProjectInfo({...projectInfo,[key]:event.target.value})} sx={{minWidth:'50%'}}>
                                                 <MenuItem value={'Not Started'}>{'Not Started'}</MenuItem>
                                                 <MenuItem value={'On Hold'}>{'On Hold'}</MenuItem>
                                                 <MenuItem value={'In Progress'}>{'In Progress'}</MenuItem>

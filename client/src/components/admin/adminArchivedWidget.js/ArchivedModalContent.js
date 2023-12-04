@@ -35,7 +35,7 @@ const ArchivedModalContent = ({data, handleClose}) => {
                                 if(key === 'project_assigned'){
                                 }else if(key === 'project_status'){
                                     return (
-                                        <FormControlLabel control={
+                                        <FormControlLabel key={key} control={
                                             <Select value={projectInfo[key]} onChange={event => setProjectInfo({...projectInfo,[key]:event.target.value})} sx={{minWidth:'50%'}} disabled={true}>
                                                 <MenuItem value={'Not Started'}>{'Not Started'}</MenuItem>
                                                 <MenuItem value={'On Hold'}>{'On Hold'}</MenuItem>
