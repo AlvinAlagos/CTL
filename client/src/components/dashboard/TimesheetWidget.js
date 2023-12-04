@@ -9,7 +9,7 @@ const TimesheetWidget = ({auth}) => {
         ?<CircularProgress/>
         :
             timesheet <= 0 
-            ? <Typography>No projects assigned</Typography>
+            ? <Typography>No hours done yet</Typography>
             :<TableContainer component={Paper} sx={{maxHeight:"440px"}}>
             <Table sx={{ minWidth: 650, minHeight:'100%' }} size="small" aria-label="a dense table">
                 <TableHead>
