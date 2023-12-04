@@ -24,9 +24,9 @@ I feel there's still alot more to do with this web app and that I've barely touc
 
 Link to web app: [CTL INC](https://ctl.vercel.app/login)
 
-Test employee credentials: 
+### Test employee credentials: 
  * User: alvin@hotmail.com
  * pass: test123
-Test Admin credentials:
+### Test Admin credentials:
  * User:Admin
  * pass:Admin
