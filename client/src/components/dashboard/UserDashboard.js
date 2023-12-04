@@ -44,7 +44,7 @@ const UserDashboard = ({auth}) => {
 
                 <Grid  item  xs={12} sm={12} xl={6} style={{ flexGrow: 1 }}>
                     <Item id="test">
-                        <CardHeaders variant="h5">Monthly Income</CardHeaders>
+                        <CardHeaders variant="h5">Timesheet</CardHeaders>
                         <TimesheetWidget auth={auth}/>
                     </Item>
                 </Grid>
