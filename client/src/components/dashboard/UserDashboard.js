@@ -8,6 +8,7 @@ import ProjectWidget from './ProjectWidget';
 import IncomeChartWidget from './IncomeChartWidget.js';
 import ClockinWidget from './ClockinWidget.js';
 import UserWidget from './UserWidget.js';
+import TimesheetWidget from './TimesheetWidget.js';
 const UserDashboard = ({auth}) => {
     
     return (
@@ -38,6 +39,13 @@ const UserDashboard = ({auth}) => {
                     <Item id="test">
                         <CardHeaders variant="h5">Monthly Income</CardHeaders>
                         <IncomeChartWidget auth={auth}/>
+                    </Item>
+                </Grid>
+
+                <Grid  item  xs={12} sm={12} xl={6} style={{ flexGrow: 1 }}>
+                    <Item id="test">
+                        <CardHeaders variant="h5">Monthly Income</CardHeaders>
+                        <TimesheetWidget auth={auth}/>
                     </Item>
                 </Grid>
                 

@@ -14,7 +14,7 @@ const ProjectWidget = ({auth}) => {
     :
         projectListings <= 0 
         ? <Typography>No projects assigned</Typography>
-        :<TableContainer component={Paper}>
+        :<TableContainer component={Paper} sx={{maxHeight:"300px"}}>
         <Table sx={{ minWidth: 650, minHeight:'100%' }} size="small" aria-label="a dense table">
             <TableHead>
                 <TableRow>
@@ -35,7 +35,7 @@ const ProjectWidget = ({auth}) => {
                             {row._id}
                         </TableCell>
                         <TableCell align="left">{row.project_name}</TableCell>
-                        <TableCell align="left"><a href="#">{(row.project_description).slice(0,30)}...</a></TableCell>
+                        <TableCell align="left">{row.project_description}</TableCell>
                         <TableCell align="left">{row.start_date}</TableCell>
                         <TableCell align="left">{row.end_date}</TableCell>
                         <TableCell align="left">{row.project_manager}</TableCell>

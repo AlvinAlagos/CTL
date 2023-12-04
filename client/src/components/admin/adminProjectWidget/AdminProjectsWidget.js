@@ -58,7 +58,7 @@ const AdminProjectsWidget = ({openModal,setOpenModal,modalType, setModalType}) =
                                 <Button onClick={() => {handleClick(row)}}>{row._id}</Button>
                             </TableCell>
                             <TableCell align="left">{row.project_name}</TableCell>
-                            <TableCell align="left"><a href="#">{(row.project_description).slice(0,30)}...</a></TableCell>
+                            <TableCell align="left">{(row.project_description)}</TableCell>
                             <TableCell align="left">{row.start_date}</TableCell>
                             <TableCell align="left">{row.end_date}</TableCell>
                             <TableCell align="left">{row.project_manager}</TableCell>
