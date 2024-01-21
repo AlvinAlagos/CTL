@@ -1,6 +1,6 @@
 const express = require('express');
 const morgan = require('morgan');
-
+const cors = require('cors');
 const {registerUser,loginUser} = require('./src/handlers/loginSignupHandlers')
 const {getProjectAssigned,getUserTimesheet,getEmployeeWage,insertClockin,getEmployee,getUser} = require('./src/handlers/userDashboardHandler')
 const {searchProject} = require('./src/handlers/projectPageHandler')
@@ -22,6 +22,8 @@ const {
 } = require('./src/handlers/adminDashboardHandler');
 
 express()
+
+.use(cors())
 
 .use(morgan('tiny'))
 
