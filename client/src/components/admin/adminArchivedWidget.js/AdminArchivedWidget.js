@@ -6,7 +6,7 @@ import ArchivedModalContent from "./ArchivedModalContent";
 
 const AdminArchivedWidget = ({openModal,setOpenModal,modalType, setModalType}) => {
     const [rowSelected, setRowSelected] = useState({});
-    const [archivedListing, setArchivedListings] = useFetch('http://localhost:3000/archived', 'GET');
+    const [archivedListing, setArchivedListings] = useFetch('https://ctl-rest.onrender.com/archived', 'GET');
     const handleClose = () => {
         setOpenModal(false);
     }

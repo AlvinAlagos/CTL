@@ -22,12 +22,12 @@ const AdminProjectsPage = ({URL}) => {
     const [rowSelected, setRowSelected] = useState({});
     const [openProjectsModal, setOpenProjectsModal] = useState(false);
     const [modalType, setModalType] = useState('create');
-    const [fetchURL, setFetchURL] = useState(URL === undefined ? 'http://localhost:3000/projects' : URL);
+    const [fetchURL, setFetchURL] = useState(URL === undefined ? 'https://ctl-rest.onrender.com/projects' : URL);
     const [openSearch, setOpenSearch] = useState(false);
     const [defaultProjectListings, setDefaultProjectListings] = useFetch(fetchURL, 'GET');
     const [projectListings, setProjectListings] = useFetch(fetchURL, 'GET');
 
-    const [searchValue] = useSearchPost('http://localhost:3000/projects/search', 'POST', {search_input: search},toCreate,setToCreate,setProjectListings);
+    const [searchValue] = useSearchPost('https://ctl-rest.onrender.com/projects/search', 'POST', {search_input: search},toCreate,setToCreate,setProjectListings);
 
     const parseObject = (data) => {
         if(data !== null){
@@ -86,10 +86,10 @@ const AdminProjectsPage = ({URL}) => {
         
         if(value === 'Projects'){
             setView(value);
-            setFetchURL('http://localhost:3000/projects')
+            setFetchURL('https://ctl-rest.onrender.com/projects')
         }else if(value === 'Archived'){
             setView(value);
-            setFetchURL('http://localhost:3000/archived')
+            setFetchURL('https://ctl-rest.onrender.com/archived')
         }
     }
 

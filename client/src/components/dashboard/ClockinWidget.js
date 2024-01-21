@@ -9,7 +9,7 @@ const ClockinWidget = ({auth}) => {
     const [selectedDate, setSelectedDate] = useState('');
     const [toCreate, setToCreate] = useState(false);
     const [body, setBody] = useState({});
-    const [createTimestamp] = useFetchPost(`http://localhost:3000/clockin`, 'POST', body, toCreate, setToCreate)
+    const [createTimestamp] = useFetchPost(`https://ctl-rest.onrender.com/clockin`, 'POST', body, toCreate, setToCreate)
 
     const handleClockin = () => {
         const body = {

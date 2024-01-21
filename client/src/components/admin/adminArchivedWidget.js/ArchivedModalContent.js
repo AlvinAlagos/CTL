@@ -19,7 +19,7 @@ const ArchivedModalContent = ({data, handleClose}) => {
         } 
     );
     const [toDelete, setToDelete] = useState(false);
-    const [deleteConfirmation] = useFetchDelete(`http://localhost:3000/archived/${data._id}`, 'DELETE', toDelete, setToDelete)
+    const [deleteConfirmation] = useFetchDelete(`https://ctl-rest.onrender.com/archived/${data._id}`, 'DELETE', toDelete, setToDelete)
 
     const handleDelete = () => {
         handleClose();

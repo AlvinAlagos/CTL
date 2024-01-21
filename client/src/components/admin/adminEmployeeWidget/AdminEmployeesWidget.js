@@ -6,7 +6,7 @@ import EmployeeModalContent from "./EmployeeModalContent";
 
 const AdminEmployeesWidget = ({openModal,setOpenModal,modalType,setModalType}) => {
 
-    const [employeeListings] = useFetch(`http://localhost:3000/employees`, 'GET');
+    const [employeeListings] = useFetch(`https://ctl-rest.onrender.com/employees`, 'GET');
     const [rows,setRows] = useState();
     const [rowSelected, setRowSelected] = useState({});
     

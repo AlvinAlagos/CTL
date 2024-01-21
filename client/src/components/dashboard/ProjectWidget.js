@@ -5,7 +5,7 @@ import useFetch from "../hooks/useFetch";
 
 const ProjectWidget = ({auth}) => {
     // const [projectListings, setProjectListings] = useState();
-    const [projectListings] = useFetch(`http://localhost:3000/projects/${auth().identifier}`)
+    const [projectListings] = useFetch(`https://ctl-rest.onrender.com/projects/${auth().identifier}`)
 
 
     return (

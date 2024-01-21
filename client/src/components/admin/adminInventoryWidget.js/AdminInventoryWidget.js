@@ -4,7 +4,7 @@ import { useState } from "react";
 import useFetch from "../../hooks/useFetch";
 import InventoryModalContent from "./InventoryModalContent";
 const AdminInventoryWidget = ({openModal,setOpenModal,modalType,setModalType}) => {
-    const [inventoryListings] = useFetch(`http://localhost:3000/inventory`, 'GET');
+    const [inventoryListings] = useFetch(`https://ctl-rest.onrender.com/inventory`, 'GET');
     const [rows,setRows] = useState();
     const [rowSelected, setRowSelected] = useState({});
     

@@ -19,9 +19,9 @@ const InventoryModalContent = ({modalType,data,handleClose}) => {
     const [toDelete, setToDelete] = useState(false);
     const [toUpdate, setToUpdate] = useState(false);
     const [toCreate, setToCreate] = useState(false);
-    const [deleteConfirmation] = useFetchDelete(`http://localhost:3000/inventory/${data._id}`, 'DELETE', toDelete, setToDelete);
-    const [updateConfirmation] = useFetchPut(`http://localhost:3000/inventory/`, 'PUT',inventoryInfo, toUpdate, setToUpdate);
-    const [createConfirmation] = useFetchPut(`http://localhost:3000/inventory/`, 'POST', inventoryInfo, toCreate, setToCreate);
+    const [deleteConfirmation] = useFetchDelete(`https://ctl-rest.onrender.com/inventory/${data._id}`, 'DELETE', toDelete, setToDelete);
+    const [updateConfirmation] = useFetchPut(`https://ctl-rest.onrender.com/inventory/`, 'PUT',inventoryInfo, toUpdate, setToUpdate);
+    const [createConfirmation] = useFetchPut(`https://ctl-rest.onrender.com/inventory/`, 'POST', inventoryInfo, toCreate, setToCreate);
 
     const handleDelete = () => {
         handleClose();

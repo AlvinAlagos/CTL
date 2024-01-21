@@ -5,7 +5,7 @@ import useFetch from "../../hooks/useFetch";
 const SelectEmployee = ({modalType,assignedEmployees,projectInfo,setProjectInfo}) => {
     const [selectedValue, setSelectedValue] = useState(assignedEmployees === null ? [] : assignedEmployees);
 
-    const [employees] = useFetch(`http://localhost:3000/employees`, 'GET');
+    const [employees] = useFetch(`https://ctl-rest.onrender.com/employees`, 'GET');
 
     const handleSelect = (value) => {
         setSelectedValue(value)

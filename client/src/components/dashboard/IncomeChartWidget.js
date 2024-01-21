@@ -38,8 +38,8 @@ const calcHoursDoneInMonths = (data,wage) => {
 
 const IncomeChartWidget = ({auth}) => {
     const [monthlyIncome, setMonthlyIncome] = useState([]);
-    const [timesheet] = useFetch(`http://localhost:3000/timesheet/${auth().identifier}`,'GET')
-    const [wage] = useFetch(`http://localhost:3000/employee/wage/${auth().identifier}`)
+    const [timesheet] = useFetch(`https://ctl-rest.onrender.com/timesheet/${auth().identifier}`,'GET')
+    const [wage] = useFetch(`https://ctl-rest.onrender.com/employee/wage/${auth().identifier}`)
     
     useEffect(() => {
         if(timesheet !== null)

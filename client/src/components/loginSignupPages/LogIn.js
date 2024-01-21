@@ -28,7 +28,7 @@ const LogIn = ({setUserInfo}) => {
             email:email,
             password:password
         }
-        fetch('http://localhost:3000/login',{
+        fetch('https://ctl-rest.onrender.com/login',{
             method:"POST",
             headers:{
                 "Accept": "application/json",

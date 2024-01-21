@@ -2,7 +2,7 @@ import { CircularProgress, Paper, Table, TableBody, TableCell, TableContainer, T
 import useFetch from "../hooks/useFetch";
 
 const TimesheetWidget = ({auth}) => {
-    const [timesheet] = useFetch(`http://localhost:3000/timesheet/${auth().identifier}`,'GET');
+    const [timesheet] = useFetch(`https://ctl-rest.onrender.com/timesheet/${auth().identifier}`,'GET');
     return (
         !timesheet
         ?<CircularProgress/>

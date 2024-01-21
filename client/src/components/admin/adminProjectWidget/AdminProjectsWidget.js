@@ -6,7 +6,7 @@ import ModalContent from "./ModalContent";
 
 const AdminProjectsWidget = ({openModal,setOpenModal,modalType, setModalType}) => {
     const [rowSelected, setRowSelected] = useState({});
-    const [projectListings, setProjectListings] = useFetch('http://localhost:3000/projects', 'GET');
+    const [projectListings, setProjectListings] = useFetch('https://ctl-rest.onrender.com/projects', 'GET');
     const handleClose = () => {
         setOpenModal(false);
     }

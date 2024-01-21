@@ -2,8 +2,8 @@ import { Box, CircularProgress, Container, FormControlLabel, TextField, Typograp
 import useFetch from "../hooks/useFetch";
 
 const UserWidget = ({auth}) => {
-    const [employeeInfo] = useFetch(`http://localhost:3000/employee/${auth().identifier}`)
-    const [userInfo] = useFetch(`http://localhost:3000/user/${auth().identifier}`)
+    const [employeeInfo] = useFetch(`https://ctl-rest.onrender.com/employee/${auth().identifier}`)
+    const [userInfo] = useFetch(`https://ctl-rest.onrender.com/user/${auth().identifier}`)
     return (
         <Box>
 

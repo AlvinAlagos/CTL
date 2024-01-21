@@ -26,7 +26,7 @@ const Signup = () => {
             password,
             confirmPassword
         }
-        fetch('http://localhost:3000/register',{
+        fetch('https://ctl-rest.onrender.com/register',{
             method:"POST",
             headers:{
                 "Accept": "application/json",

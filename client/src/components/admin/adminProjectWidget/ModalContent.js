@@ -26,9 +26,9 @@ const ModalContent = ({modalType,data, handleClose}) => {
     const [toDelete, setToDelete] = useState(false);
     const [toUpdate, setToUpdate] = useState(false);
     const [toCreate, setToCreate] = useState(false);
-    const [deleteConfirmation] = useFetchDelete(`http://localhost:3000/projects/${data._id}`, 'DELETE', toDelete, setToDelete)
-    const [updateConfirmation] = useFetchPut(`http://localhost:3000/projects/`, 'PUT',projectInfo, toUpdate, setToUpdate)
-    const [createConfirmation] = useFetchPut(`http://localhost:3000/projects/`, 'POST',projectInfo, toCreate, setToCreate)
+    const [deleteConfirmation] = useFetchDelete(`https://ctl-rest.onrender.com/projects/${data._id}`, 'DELETE', toDelete, setToDelete)
+    const [updateConfirmation] = useFetchPut(`https://ctl-rest.onrender.com/projects/`, 'PUT',projectInfo, toUpdate, setToUpdate)
+    const [createConfirmation] = useFetchPut(`https://ctl-rest.onrender.com/projects/`, 'POST',projectInfo, toCreate, setToCreate)
 
     //PUT CONFIRM SCREEN
     const handleDelete = () => {
