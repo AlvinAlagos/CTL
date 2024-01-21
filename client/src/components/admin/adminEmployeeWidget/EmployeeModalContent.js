@@ -15,9 +15,9 @@ const EmployeeModalContent = ({modalType,data,handleClose}) => {
     const [toDelete, setToDelete] = useState(false);
     const [toUpdate, setToUpdate] = useState(false);
     const [toCreate, setToCreate] = useState(false);
-    const [deleteConfirmation] = useFetchDelete(`http://localhost:3000/employees/${data._id}`, 'DELETE', toDelete, setToDelete)
-    const [updateConfirmation] = useFetchPut(`http://localhost:3000/employees/`, 'PUT',employeeInfo, toUpdate, setToUpdate)
-    const [createConfirmation] = useFetchPut(`http://localhost:3000/employees/`, 'POST',employeeInfo, toCreate, setToCreate)
+    const [deleteConfirmation] = useFetchDelete(`https://ctl-rest.onrender.com/employees/${data._id}`, 'DELETE', toDelete, setToDelete)
+    const [updateConfirmation] = useFetchPut(`https://ctl-rest.onrender.com/employees/`, 'PUT',employeeInfo, toUpdate, setToUpdate)
+    const [createConfirmation] = useFetchPut(`https://ctl-rest.onrender.com/employees/`, 'POST',employeeInfo, toCreate, setToCreate)
 
     const handleDelete = () => {
         handleClose();
